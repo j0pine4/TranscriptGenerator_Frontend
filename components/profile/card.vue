@@ -8,7 +8,7 @@
         <p class="font-light mb-4"> {{ props.document?.description }} </p>
         
         <div class="flex justify-between gap-2">
-            <button class="bg-primary text-white rounded w-full p-2"> View </button>
+            <NuxtLink to="/profile/1" class="bg-primary text-white rounded w-full p-2 text-center"> View </NuxtLink>
             <button class="border border-primary text-primary rounded w-full p-2"> Delete </button>
         </div>
         

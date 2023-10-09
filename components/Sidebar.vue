@@ -1,6 +1,6 @@
 <template>
     
-    <div class="grid grid-cols-4 col-span-12 md:col-span-4 h-fit gap-2 mt-4"> 
+    <div class="grid grid-cols-4 col-span-12 md:col-span-4 h-fit gap-2 mt-4 print:hidden"> 
 
         <h1 class="text-white font-bold text-xl tracking-wider col-span-4"> What else can I do? </h1>
 

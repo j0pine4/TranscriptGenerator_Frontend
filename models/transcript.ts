@@ -1,3 +1,4 @@
 export interface Transcript{
-    body: string | string[]
+    transcript: string,
+    tokenCount: number,
 }

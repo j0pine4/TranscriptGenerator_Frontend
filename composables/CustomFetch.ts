@@ -52,7 +52,7 @@ export const useCustomFetch = () => {
 
         return useQuery({
             queryKey: ['transcript', video_id],
-            queryFn: () => fetchWithHeaders<string>(url),
+            queryFn: () => fetchWithHeaders<Transcript>(url),
             retry: async (failureCount: number, error: any) => await AuthRetryFunction(['transcript', video_id], failureCount, error),
             refetchOnWindowFocus: false
         })
