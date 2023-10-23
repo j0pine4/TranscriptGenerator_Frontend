@@ -1,5 +1,24 @@
 <template>
-    <!-- Hero -->
+
+    <!-- Saving modal -->
+    <generate-modal id="notes-save-modal" header="Save Transcript">
+
+        <div class="col-span-3">
+            <h1 class="text-3xl lg:leading-tight font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mb-2">Original Video: </h1>
+            <iframe class="w-full h-[250px] mb-6 rounded-xl print:hidden" :src="'https://www.youtube.com/embed/' + state.currentVideoID" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+            <form @submit.prevent="handleSave()" class="flex flex-col gap-4">
+
+                <input v-model="notesSave.title" id="notes-title" type="text" required maxlength="255" placeholder="Title" class="py-3 px-4 block w-full border-transparent rounded-md text-sm focus:border-primary focus:ring-primary sm:p-4">
+
+                <textarea v-model="notesSave.description" id="notes-description" placeholder="Description" maxlength="255" required class="py-3 px-4 block w-full border-transparent rounded-md text-sm focus:border-primary focus:ring-primary sm:p-4"></textarea>
+
+                <button type="submit" class="bg-primary p-3 rounded-md text-white w-full"> Save </button>
+            
+            </form>
+
+        </div>
+    </generate-modal>
     
     <div class="container mx-auto relative">
 
@@ -28,13 +47,6 @@
 
                 <div v-if="!isLoading" class="text-white flex gap-4 items-center mb-6 justify-center print:hidden">
 
-                    <div class="flex flex-col items-center justify-center  text-primary font-bold cursor-pointer hover:scale-105 duration-300 transition-all" data-hs-overlay="#hs-modal-upgrade-to-pro">
-                        <AcademicCapIcon class="h-6 w-6  mb-1"></AcademicCapIcon>
-                        <p> Generate </p>
-                    </div>
-
-                    <p> · </p>
-
                     <div class="flex flex-col items-center justify-center font-light cursor-pointer hover:text-primary duration-300 transition-all">
                         <ClipboardDocumentIcon class="h-6 w-6  mb-1"></ClipboardDocumentIcon>
                         <p> Copy </p>
@@ -45,6 +57,13 @@
                     <div @click="handlePrint()" class="flex flex-col items-center font-light cursor-pointer hover:text-primary duration-300 transition-all">
                         <PrinterIcon class="h-6 w-6 mb-1"></PrinterIcon>
                         <p> Print </p>
+                    </div>
+
+                    <p> · </p>
+
+                    <div class="flex flex-col items-center font-light cursor-pointer hover:text-primary duration-300 transition-all" data-hs-overlay="#notes-save-modal">
+                        <DocumentPlusIcon class="h-6 w-6 mb-1"></DocumentPlusIcon>
+                        <p> Save </p>
                     </div>
 
                 </div>
@@ -68,16 +87,24 @@
   </template>
   
   <script setup lang="ts">
-    import { ClipboardDocumentIcon, PrinterIcon, ArrowLeftIcon, AcademicCapIcon, PencilSquareIcon  } from '@heroicons/vue/24/outline'
+    import { ClipboardDocumentIcon, PrinterIcon, ArrowLeftIcon, AcademicCapIcon, PencilSquareIcon, DocumentPlusIcon  } from '@heroicons/vue/24/outline'
     import { API } from '~/composables/api/useAPI';
     import { useGlobalState } from '~/stores/globalState';
 
     const state = useGlobalState()
     const client = new API();
     const router = useRouter();
-
+    const { removeModals } = useUtils()
+    const { saveDocument } = useCustomFetch();
 
     const isLoading = ref<boolean>(true)
+
+    const notesSave = ref({
+        videoID: '',
+        title: '',
+        description: '',
+        content: '',
+    })
 
     if(!state.prompt || !state.transcript){
         router.push('/');
@@ -100,6 +127,17 @@
 
     const handlePrint = () => {
         window.print()
+    }
+
+    const handleSave = () => {
+        notesSave.value.videoID = state.currentVideoID;
+        notesSave.value.content = state.generatedNotes!;
+
+        saveDocument(notesSave.value, 'GENERATED')
+
+        // Remove the modal
+        removeModals()
+        router.push('/profile')
     }
 
     getData();
@@ -129,6 +167,7 @@
         padding: 10px;
         border-radius: 10px;
     }
+    
   </style>
   
   

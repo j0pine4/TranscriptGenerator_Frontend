@@ -1,4 +1,5 @@
 export interface Document {
+    id?: number,
     user: number,
     videoID: string,
     title: string,

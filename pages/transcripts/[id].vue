@@ -1,7 +1,7 @@
 <template>
     <!-- Hero -->
 
-    <generate-modal>
+    <generate-modal id="generate-modal" header="Generate" title="Create notes, pull key terms or make a blog post from your transcript...">
 
         <!-- Card -->
         <div @click="handlePrompt(PROMPTS.NOTES)" class="cursor-pointer bg-white/5 p-4 transition duration-300 rounded-md hover:bg-white/10">
@@ -100,6 +100,26 @@
 
 
     </generate-modal>
+
+    <!-- Saving modal -->
+    <generate-modal id="transcript-save-modal" header="Save Transcript">
+
+        <div class="col-span-3">
+            <h1 class="text-3xl lg:leading-tight font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mb-2">Original Video: </h1>
+            <iframe class="w-full h-[250px] mb-6 rounded-xl print:hidden" :src="'https://www.youtube.com/embed/' + video_id" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        
+            <form @submit.prevent="handleSave()" class="flex flex-col gap-4">
+
+                <input v-model="transcriptSave.title" id="transcript-title" type="text" required maxlength="255" placeholder="Title" class="py-3 px-4 block w-full border-transparent rounded-md text-sm focus:border-primary focus:ring-primary sm:p-4">
+        
+                <textarea v-model="transcriptSave.description" id="transcript-description" placeholder="Description" maxlength="255" required class="py-3 px-4 block w-full border-transparent rounded-md text-sm focus:border-primary focus:ring-primary sm:p-4"></textarea>
+
+                <button type="submit" class="bg-primary p-3 rounded-md text-white w-full"> Save </button>
+            
+            </form>
+        
+        </div>
+    </generate-modal>
     
     <div class="container mx-auto relative">
 
@@ -129,7 +149,7 @@
 
                 <div class="text-white flex gap-4 items-center mb-6 justify-center print:hidden">
 
-                    <div v-if="transcript?.tokenCount! < 4000" class="flex flex-col items-center justify-center  text-primary font-bold cursor-pointer hover:scale-105 duration-300 transition-all" data-hs-overlay="#hs-bg-gray-on-hover-cards">
+                    <div v-if="transcript?.tokenCount! < 4000" class="flex flex-col items-center justify-center  text-primary font-bold cursor-pointer hover:scale-105 duration-300 transition-all" data-hs-overlay="#generate-modal">
                         <AcademicCapIcon class="h-6 w-6  mb-1"></AcademicCapIcon>
                         <p> Generate </p>
                     </div>
@@ -160,9 +180,19 @@
 
                     <p> · </p>
 
-                    <div @click="handleSave()" class="flex flex-col items-center font-light cursor-pointer hover:text-primary duration-300 transition-all">
+                    <div v-if="state.user" class="flex flex-col items-center font-light cursor-pointer hover:text-primary duration-300 transition-all" data-hs-overlay="#transcript-save-modal">
                         <DocumentPlusIcon class="h-6 w-6 mb-1"></DocumentPlusIcon>
                         <p> Save </p>
+                    </div>
+
+                    <div v-else class="hs-tooltip inline-block">
+                        <button type="button" class="hs-tooltip-toggle flex-col items-center justify-center inline-flex rounded-full text-white/25">
+                            <DocumentPlusIcon class="h-6 w-6 mb-1"></DocumentPlusIcon>
+                            <p> Save </p>
+                            <span class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 max-w-xs transition-opacity inline-block absolute invisible z-10 py-2 px-4 border border-dark-gray bg-black text-white rounded text-xs" role="tooltip">
+                                You must be Logged in to save this transcript
+                            </span>
+                        </button>
                     </div>
 
                 </div>
@@ -174,7 +204,11 @@
                 <h1 class="text-3xl lg:leading-tight font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mb-2">Original Video: </h1>
                 <iframe class="w-full h-[500px] mb-12 rounded-xl print:hidden" :src="'https://www.youtube.com/embed/' + video_id" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 
-                <div v-if="!error">
+                <div v-if="isLoading">
+                    <skeleton-loader></skeleton-loader>
+                </div>
+                
+                <div v-if="!error && !isLoading">
                     <h1  class="text-3xl lg:leading-tight font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mb-2">Transcript: </h1>
                     <p class="text-white print:text-black leading-8"> {{ transcript?.transcript }} </p>
                 </div>
@@ -201,34 +235,39 @@
     import { useClipboard } from '@vueuse/core'
     import { useGlobalState } from '~/stores/globalState'
     import { PROMPTS } from '~/models/prompts'
+    import { Document } from '~/models/document'
     import { ClipboardDocumentIcon, PrinterIcon, ArrowLeftIcon, AcademicCapIcon, PencilSquareIcon, KeyIcon, MegaphoneIcon, QuestionMarkCircleIcon, GlobeAmericasIcon, DocumentPlusIcon  } from '@heroicons/vue/24/outline'
 
     definePageMeta({
         middleware: ["is-authenticated"]
     })
 
-    const { getTranscriptByID } = useCustomFetch()
+    const { getTranscriptByID, saveDocument } = useCustomFetch();
+    const { removeModals } = useUtils();
     const router = useRouter();
     const route = useRoute();
     const video_id: string = route.params.id.toString();
+
+    const transcriptSave = ref({
+        videoID: '',
+        title: '',
+        description: '',
+        content: '',
+    })
     
     const { text, copy, copied, isSupported } = useClipboard()
 
     const state = useGlobalState()
-    const {data: transcript, error} = getTranscriptByID(video_id)
+    const {data: transcript, error, isLoading} = getTranscriptByID(video_id)
 
     const handlePrompt = (prompt: PROMPTS) => {
 
         // Remove the modal
-        let ModalOverlay = document.querySelector('[data-hs-overlay-backdrop-template]');
-        ModalOverlay?.remove();
-
-        // Remove the overflow hidden from body
-        let body = document.body;
-        body.style.overflow = 'auto'
+        removeModals()
 
         state.prompt = prompt;
         state.transcript = transcript.value!.transcript;
+        state.currentVideoID = video_id;
         router.push('/generated');
     }
 
@@ -237,8 +276,16 @@
     }
 
     const handleSave = () => {
-        console.log("Saving")
+        transcriptSave.value.videoID = video_id;
+        transcriptSave.value.content = transcript.value?.transcript!;
+
+        saveDocument(transcriptSave.value, 'TRANSCRIPT')
+
+        // Remove the modal
+        removeModals()
+        router.push('/profile')
     }
+
 
 
   </script>

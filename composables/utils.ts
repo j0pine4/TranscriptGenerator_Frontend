@@ -19,8 +19,18 @@ export function useUtils() {
         return newDate.toDateString();
     } 
 
+    const removeModals = () => {
+        let ModalOverlay = document.querySelector('[data-hs-overlay-backdrop-template]');
+        ModalOverlay?.remove();
+
+        // Remove the overflow hidden from body
+        let body = document.body;
+        body.style.overflow = 'auto'
+    }
+
     return {
         videoIdParse,
-        parseDate
+        parseDate,
+        removeModals
     }
 }

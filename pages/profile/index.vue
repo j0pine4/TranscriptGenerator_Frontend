@@ -6,11 +6,10 @@
         <img class="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 unselectable w-[1600px] h-[1600px]" src="~/assets/img/sphere.svg" alt="">
     </div>
 
-    <div class="relative overflow-x-clip z-10">
-
+    <div>
         <div class="container mx-auto relative my-12 px-2">
 
-            <profile-user-card class="mb-6"></profile-user-card>
+            <profile-user-card></profile-user-card>
 
             <div class="flex justify-center">
                 <div class="flex bg-black border border-white/5 hover:bg-black/80 rounded-lg transition p-1">
@@ -26,21 +25,23 @@
             </div>
 
             <div class="mt-3 mx-auto">
-                <div id="segment-1" role="tabpanel" aria-labelledby="segment-item-1" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                <div id="segment-1" role="tabpanel" aria-labelledby="segment-item-1" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
 
-                    <div v-for="transcript in transcripts">
-
-                        <profile-card :document="transcript"></profile-card>
-                        
+                    <div v-if="!isLoadingTranscripts" v-for="transcript in transcripts">
+                        <profile-card :document="transcript" :deleteDoc="refetchTranscripts" :key="transcript.id"></profile-card>
                     </div>
+
+                    <skeleton-card v-else v-for="i in 10"></skeleton-card>
                     
                 </div>
-                <div id="segment-2" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" role="tabpanel" aria-labelledby="segment-item-2" >
-                    <div v-for="note in notes">
-
-                        <profile-card :document="note"></profile-card>
-
+                <div id="segment-2" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" role="tabpanel" aria-labelledby="segment-item-2" >
+                    
+                    <div v-if="!isLoadingNotes" v-for="note in notes">
+                        <profile-card :document="note" :deleteDoc="refetchNotes" :key="note.id"></profile-card>
                     </div>
+
+                    <skeleton-card v-else v-for="i in 10"></skeleton-card>
+
                 </div>
             </div>
         </div>
@@ -57,8 +58,8 @@ definePageMeta({
 
 const { getUserDocuments } = useCustomFetch();
 
-const {data:transcripts, refetch:refetchTranscripts} = getUserDocuments('TRANSCRIPT', true)
-const {data:notes, refetch:refetchNotes} = getUserDocuments('GENERATED', false)
+const {data:transcripts, refetch:refetchTranscripts, isLoading: isLoadingTranscripts} = getUserDocuments('TRANSCRIPT', true)
+const {data:notes, refetch:refetchNotes, isLoading: isLoadingNotes} = getUserDocuments('GENERATED', false)
 
 
  

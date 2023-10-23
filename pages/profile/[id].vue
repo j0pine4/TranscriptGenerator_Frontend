@@ -59,15 +59,12 @@
                 </div>
                 
 
-
-                <!-- <h1 v-if="state.transcript"> Tokens: {{ tokenNumbers(state.transcript) }} </h1> -->
-
                 <h1 class="text-3xl lg:leading-tight font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mb-2">Original Video: </h1>
-                <iframe class="w-full h-[500px] mb-12 rounded-xl print:hidden" :src="'https://www.youtube.com/embed/' + video_id" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe class="w-full h-[500px] mb-12 rounded-xl print:hidden" :src="'https://www.youtube.com/embed/' + document?.videoID" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 
                 <div v-if="!error">
                     <h1  class="text-3xl lg:leading-tight font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mb-2">Transcript: </h1>
-                    <!-- <p class="text-white print:text-black leading-8"> {{ transcript?.transcript }} </p> -->
+                    <div v-html="document?.content" class="text-white print:text-black leading-8">  </div>
                 </div>
 
                 <div v-if="error">
@@ -98,35 +95,60 @@
         middleware: ["is-authenticated"]
     })
 
-    const { getTranscriptByID } = useCustomFetch()
+    const { getDocumentByID } = useCustomFetch()
     const router = useRouter();
     const route = useRoute();
-    const video_id: string = route.params.id.toString();
+    const document_id: number = Number(route.params.id);
     
     const { text, copy, copied, isSupported } = useClipboard()
 
     const state = useGlobalState()
-    const {data: transcript, error} = getTranscriptByID(video_id)
+    const {data: document, error} = getDocumentByID(document_id)
 
-    const handlePrompt = (prompt: PROMPTS) => {
+    // const handlePrompt = (prompt: PROMPTS) => {
 
-        // Remove the modal
-        let ModalOverlay = document.querySelector('[data-hs-overlay-backdrop-template]');
-        ModalOverlay?.remove();
+    //     // Remove the modal
+    //     let ModalOverlay = document.querySelector('[data-hs-overlay-backdrop-template]');
+    //     ModalOverlay?.remove();
 
-        // Remove the overflow hidden from body
-        let body = document.body;
-        body.style.overflow = 'auto'
+    //     // Remove the overflow hidden from body
+    //     let body = document.body;
+    //     body.style.overflow = 'auto'
 
-        state.prompt = prompt;
-        state.transcript = transcript.value!.transcript;
-        router.push('/generated');
-    }
+    //     state.prompt = prompt;
+    //     state.transcript = transcript.value!.transcript;
+    //     router.push('/generated');
+    // }
 
     const handlePrint = () => {
         window.print()
     }
 
   </script>
+
+    <style>
+
+    h1{
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    h2{
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    ul{
+        list-style: disc;
+        margin-left: 50px;
+    }
+
+    pre{
+        background-color: black;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    </style>
   
   
