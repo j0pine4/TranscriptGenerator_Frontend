@@ -17,7 +17,7 @@
 
             <!-- Form -->
             <form class="flex justify-center items-center gap-2 w-full max-w-[40rem] mx-auto" @submit.prevent="handleSubmit()">
-                <input v-model="input" type="text" id="hs-hero-name-1" class="py-3 px-4 block w-full border-transparent rounded-md text-sm focus:border-primary focus:ring-primary sm:p-4" placeholder="Paste Youtube Link...">
+                <input v-model="input" type="text" class="py-3 px-4 block w-full rounded-md text-black text-sm focus:border-primary focus:ring-primary sm:p-4" placeholder="Paste Youtube Link...">
                 <button type="submit" class="bg-primary px-3 rounded-md h-full text-white md:w-60"> Submit </button>
             </form>
             <!-- End Form -->

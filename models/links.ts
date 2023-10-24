@@ -3,5 +3,5 @@ import { FunctionalComponent, HTMLAttributes, VNodeProps } from "nuxt/dist/app/c
 export interface Link {
     title: string,
     url: string,
-    icon?: FunctionalComponent<HTMLAttributes & VNodeProps, {}, any>
+    icon?: string
 }

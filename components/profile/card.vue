@@ -2,9 +2,9 @@
 
     <slot>
         <!-- Saving modal -->
-        <generate-modal id="delete-document-modal" header="Delete" >
+        <UModal v-model="deleteModal">
 
-            <div class="col-span-3 text-center">
+            <div class="col-span-3 text-center p-6">
                 <h1 class="text-3xl lg:leading-tight font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mb-2"> This document {{ documentID }} will be DELETED </h1>
                 <p class="text-white mb-6"> Are you sure you'd like to continue? </p>
 
@@ -16,26 +16,29 @@
                 </form>
 
             </div>
-        </generate-modal>
+        </UModal>
 
 
-        <div class="bg-black/75 rounded-xl border-2 border-dark-gray backdrop:blur-3xl p-4 text-white h-full flex flex-col justify-between">
-
-            <h1 class="font-bold text-xl mb-1"> {{ props.document?.id! }} {{ props.document?.title }} </h1>
-            <p class="font-light text-xs text-white/50 mb-4"> {{ parseDate(props.document?.created_on!) }} </p>
+        <UCard>
+            <template #header>
+                <h1 class="font-bold text-xl mb-1"> {{ props.document?.id! }} {{ props.document?.title }} </h1>
+                <p class="font-light text-xs text-white/50"> {{ parseDate(props.document?.created_on!) }} </p>
+            </template>
 
             <div class="h-full">
                 <iframe class="w-full h-[200px] mb-4 rounded-xl" :src="'https://www.youtube.com/embed/' + props.document?.videoID" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
 
-            <p class="font-light mb-4"> {{ props.document?.description }} </p>
-            
-            <div class="flex justify-between w-full gap-2 justify-self-end">
-                <NuxtLink :to="`/profile/${props.document?.id}`" class="bg-primary text-white rounded w-full p-2 text-center"> View </NuxtLink>
-                <button @click="setDocument(props.document?.id!)" data-hs-overlay="#delete-document-modal" class="border border-primary text-primary rounded w-full p-2"> Delete </button>
-            </div>
-            
-        </div>
+            <p class="font-light mb-4"> {{ parseDescription(props.document?.description!) }} </p>
+
+            <template #footer>
+                <div class="flex justify-between w-full gap-2 justify-self-end">
+                    <NuxtLink :to="`/profile/${props.document?.id}`" class="bg-primary text-white rounded w-full p-2 text-center"> View </NuxtLink>
+                    <button @click="setDocument(props.document?.id!)" class="border border-primary text-primary rounded w-full p-2"> Delete </button>
+                </div>
+            </template>
+        </UCard>
+
     </slot>
 </template>
 
@@ -44,8 +47,9 @@
 import { Document } from 'models/document';
 import { PropType } from 'nuxt/dist/app/compat/capi';
 
-const { parseDate, removeModals } = useUtils();
+const { parseDate, removeModals, parseDescription } = useUtils();
 const { deleteDocument }  = useCustomFetch();
+const deleteModal = ref(false)
 
 const props = defineProps({
     document: Object as PropType<Document>
@@ -68,6 +72,7 @@ const confirmDelete = async () => {
 }
 
 const setDocument = (id: number) => {
+    deleteModal.value = true;
     console.log(`Document ID: ${id}`)
     documentID.value = id;
 }

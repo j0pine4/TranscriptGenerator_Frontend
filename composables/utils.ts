@@ -19,6 +19,14 @@ export function useUtils() {
         return newDate.toDateString();
     } 
 
+    const parseDescription = (description: string) => {
+        if(description.length > 30){
+            return `${description.slice(0,30)}...`
+        } else {
+            return description
+        }
+    } 
+
     const removeModals = () => {
         let ModalOverlay = document.querySelector('[data-hs-overlay-backdrop-template]');
         ModalOverlay?.remove();
@@ -31,6 +39,7 @@ export function useUtils() {
     return {
         videoIdParse,
         parseDate,
-        removeModals
+        removeModals,
+        parseDescription
     }
 }

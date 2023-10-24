@@ -2,11 +2,7 @@
     <div class="container mx-auto relative">
 
 
-        <div class="fixed -z-[10] print:hidden">
-            <img class="object-cover -top-20 w-screen h-[calc(100vh+162px)] md:h-[calc(100vh+120px)]" src="~/assets/img/bg_dots.png" alt="">
-            <img class="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 unselectable w-[1600px] h-[1600px]" src="~/assets/img/sphere.svg" alt="">
-            <img class="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 unselectable w-[1600px] h-[1600px]" src="~/assets/img/sphere.svg" alt="">
-        </div>
+        <background-elements></background-elements>
 
         <!-- Back Button -->
         <NuxtLink to="/profile" class="print:hidden mt-6 text-white flex gap-2 items-center justify-center w-fit"> 
