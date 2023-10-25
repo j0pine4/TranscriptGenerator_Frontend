@@ -47,40 +47,36 @@
                 </div>
             </template>
 
-            <div class="flex flex-col gap-6 mb-6">
+            <div class="flex flex-col gap-6  mt-12">
                 <NuxtLink v-for="link in navLinks" :to="link.url" class="flex items-center gap-4">
                     <UIcon :name="link.icon!" :is="link.icon" class="h-8 w-8 text-white/50"></UIcon>
                     <span> {{ link.title }} </span>
                 </NuxtLink>
-            </div>
 
-            
-            <template #footer>
                 <!-- Authenticated -->
-                <div v-if="state.user"> 
-                    <div class="mb-4">
-                        <NuxtLink to="/profile" class="flex items-center gap-4">
-                            <UIcon name="i-heroicons-user" class="h-8 w-8 text-white/50"></UIcon>
-                            <span> My Profile </span>
-                        </NuxtLink>
-                    </div>
-                    
-                    <div>
-                        <div @click="logout()" class="flex items-center gap-4">
-                            <UIcon name="i-heroicons-arrow-top-right-on-square" class="h-8 w-8 text-white/50"></UIcon>
-                            <span> Logout </span>
-                        </div>
-                    </div>
-                    
+                <div v-if="state.user">
+                    <NuxtLink to="/profile" class="flex items-center gap-4">
+                        <UIcon name="i-heroicons-user" class="h-8 w-8 text-white/50"></UIcon>
+                        <span> My Profile </span>
+                    </NuxtLink>
                 </div>
+                
+                <div v-if="state.user">
+                    <div @click="logout()" class="flex items-center gap-4">
+                        <UIcon name="i-heroicons-arrow-top-right-on-square" class="h-8 w-8 text-white/50"></UIcon>
+                        <span> Logout </span>
+                    </div>
+                </div>
+                    
 
                 <!-- Not Authenticated -->
-                <div v-else class="flex gap-4 items-center"> 
+                <div v-if="!state.user" class="flex gap-4 items-center"> 
                     <div> <NuxtLink to="/auth/login">Login</NuxtLink> </div>
                     <div>|</div>
                     <div> <NuxtLink to="/auth/login">Register</NuxtLink> </div>
                 </div>
-            </template>
+
+            </div>
 
         </UCard>
     </USlideover>
