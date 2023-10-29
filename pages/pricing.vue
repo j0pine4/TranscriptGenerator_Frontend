@@ -50,7 +50,7 @@
             <!-- End Card -->
 
             <!-- Card -->
-            <div class="flex flex-col bg-white/10 border-2 backdrop-blur border-primary text-center shadow-xl rounded-2xl p-4 md:p-8 dark:bg-slate-900 dark:border-violet-700">
+            <div class="flex flex-col bg-white/10 border-2 backdrop-blur border-primary text-center shadow-xl rounded-2xl p-4 md:p-8">
                 <p class="mb-3"><span class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-md text-xs uppercase font-semibold bg-violet-100 text-violet-800 dark:bg-primary dark:text-white">Most popular</span></p>
                 <h4 class="font-medium text-lg text-white dark:text-gray-200">Premium</h4>
                 <span class="mt-5 font-bold text-3xl md:text-4xl xl:text-5xl text-white dark:text-gray-200">
@@ -79,14 +79,14 @@
 
                 </ul>
 
-                <a class="mt-5 inline-flex justify-center items-center gap-x-3 text-center bg-primary hover:bg-violet-700 text-white text-sm font-medium rounded-lg hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4 dark:focus:ring-offset-gray-800" href="https://github.com/htmlstreamofficial/preline/tree/main/examples/html">
+                <a class="mt-5 inline-flex justify-center items-center gap-x-3 text-center bg-primary hover:bg-violet-700 text-white text-sm font-medium rounded-lg hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4 " href="https://github.com/htmlstreamofficial/preline/tree/main/examples/html">
                     Get started
                 </a>
             </div>
             <!-- End Card -->
 
             <!-- Card -->
-            <div class="flex flex-col bg-white/10 border backdrop-blur border-gray-200 text-center rounded-2xl p-4 md:p-8 dark:bg-slate-900 dark:border-gray-700">
+            <div class="flex flex-col bg-white/10 border backdrop-blur border-gray-200 text-center rounded-2xl p-4 md:p-8">
                 <h4 class="font-medium text-lg text-white dark:text-gray-200">Enhanced</h4>
                 <span class="mt-5 font-bold text-3xl md:text-4xl xl:text-5xl text-white dark:text-gray-200">
                     $24.99
@@ -129,7 +129,7 @@
             <!-- End Card -->
 
             <!-- Card -->
-            <div class="flex flex-col bg-white/10 border backdrop-blur border-gray-200 text-center rounded-2xl p-4 md:p-8 dark:bg-slate-900 dark:border-gray-700">
+            <div class="flex flex-col bg-white/10 border backdrop-blur border-gray-200 text-center rounded-2xl p-4 md:p-8">
                 <h4 class="font-medium text-lg text-white dark:text-gray-200">Ultimate</h4>
                 <span class="mt-5 font-bold text-3xl md:text-4xl xl:text-5xl text-white dark:text-gray-200">
                     $49.99
@@ -176,7 +176,7 @@
 
         <!-- Title -->
         <div class="w-2/3 sm:w-1/2 lg:w-1/3 mx-auto text-center mt-10 md:mt-14 mb-6 lg:mt-24">
-            <h2 class="text-gray-200 dark:text-gray-200">Trusted by Open Source, enterprise, and more than 99,000 of you</h2>
+            <h2 class="text-gray-200 dark:text-gray-200">Embraced by students, educators, and knowledge seekers</h2>
         </div>
         <!-- End Title -->
 
@@ -206,133 +206,31 @@
     <!-- Grid -->
     <div class="grid md:grid-cols-6 gap-6">
         <div class="md:col-span-2">
-        <div class="max-w-xs">
-            <h2 class="text-2xl font-bold md:text-3xl md:leading-tight text-white">Frequently<br>asked questions</h2>
-            <p class="mt-1 hidden md:block text-gray-200">Answers to the most frequently asked questions.</p>
-        </div>
-        </div>
+            <div class="max-w-xs">
+                <h2 class="text-2xl font-bold md:text-3xl md:leading-tight text-white">Frequently<br>asked questions</h2>
+                <p class="mt-1 hidden md:block text-gray-200">Answers to the most frequently asked questions.</p>
+            </div>
+            </div>
         <!-- End Col -->
 
         <div class="md:col-span-4">
-        <!-- Accordion -->
-        <div class="hs-accordion-group divide-y divide-gray-200">
-            <div class="hs-accordion pb-3 active" id="hs-basic-with-title-and-arrow-stretched-heading-one">
-            <button class="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-left text-white transition hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-200" aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-one">
-                Can I cancel at anytime?
-                <svg class="hs-accordion-active:hidden block w-3 h-3 text-gray-200 group-hover:text-gray-500 dark:text-gray-200" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-                <svg class="hs-accordion-active:block hidden w-3 h-3 text-gray-200 group-hover:text-gray-500 dark:text-gray-200" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 11L8.16086 5.31305C8.35239 5.13625 8.64761 5.13625 8.83914 5.31305L15 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-            </button>
-            <div id="hs-basic-with-title-and-arrow-stretched-collapse-one" class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300" aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-one">
-                <div class="pr-8">
-                <p class="text-gray-200 dark:text-gray-200">
-                    Yes, you can cancel anytime no questions are asked while you cancel but we would highly appreciate if you will give us some feedback.
-                </p>
-                </div>
-            </div>
-            </div>
-
-            <div class="hs-accordion pt-6 pb-3" id="hs-basic-with-title-and-arrow-stretched-heading-two">
-            <button class="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-left text-white transition hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-200" aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-two">
-                My team has credits. How do we use them?
-                <svg class="hs-accordion-active:hidden block w-3 h-3 text-gray-200 group-hover:text-gray-500 dark:text-gray-200" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-                <svg class="hs-accordion-active:block hidden w-3 h-3 text-gray-200 group-hover:text-gray-500 dark:text-gray-200" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 11L8.16086 5.31305C8.35239 5.13625 8.64761 5.13625 8.83914 5.31305L15 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-            </button>
-            <div id="hs-basic-with-title-and-arrow-stretched-collapse-two" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-two">
-                <div class="pr-8">
-                <p class="text-gray-200 dark:text-gray-200">
-                    Once your team signs up for a subscription plan. This is where we sit down, grab a cup of coffee and dial in the details.
-                </p>
-                </div>
-            </div>
-            </div>
-
-            <div class="hs-accordion pt-6 pb-3" id="hs-basic-with-title-and-arrow-stretched-heading-three">
-            <button class="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-left text-white transition hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-200" aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-three">
-                How does Preline's pricing work?
-                <svg class="hs-accordion-active:hidden block w-3 h-3 text-gray-200 group-hover:text-gray-500 dark:text-gray-200" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-                <svg class="hs-accordion-active:block hidden w-3 h-3 text-gray-200 group-hover:text-gray-500 dark:text-gray-200" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 11L8.16086 5.31305C8.35239 5.13625 8.64761 5.13625 8.83914 5.31305L15 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-            </button>
-            <div id="hs-basic-with-title-and-arrow-stretched-collapse-three" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-three">
-                <div class="pr-8">
-                <p class="text-gray-200 dark:text-gray-200">
-                    Our subscriptions are tiered. Understanding the task at hand and ironing out the wrinkles is key.
-                </p>
-                </div>
-            </div>
-            </div>
-
-            <div class="hs-accordion pt-6 pb-3" id="hs-basic-with-title-and-arrow-stretched-heading-four">
-            <button class="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-left text-white transition hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-200" aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-four">
-                How secure is Preline?
-                <svg class="hs-accordion-active:hidden block w-3 h-3 text-gray-200 group-hover:text-gray-500 dark:text-gray-200" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-                <svg class="hs-accordion-active:block hidden w-3 h-3 text-gray-200 group-hover:text-gray-500 dark:text-gray-200" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 11L8.16086 5.31305C8.35239 5.13625 8.64761 5.13625 8.83914 5.31305L15 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-            </button>
-            <div id="hs-basic-with-title-and-arrow-stretched-collapse-four" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-four">
-                <div class="pr-8">
-                <p class="text-gray-200 dark:text-gray-200">
-                    Protecting the data you trust to Preline is our first priority. This part is really crucial in keeping the project in line to completion.
-                </p>
-                </div>
-            </div>
-            </div>
-
-            <div class="hs-accordion pt-6 pb-3" id="hs-basic-with-title-and-arrow-stretched-heading-five">
-            <button class="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-left text-white transition hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-200" aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-five">
-                How do I get access to a theme I purchased?
-                <svg class="hs-accordion-active:hidden block w-3 h-3 text-gray-200 group-hover:text-gray-500 dark:text-gray-200" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-                <svg class="hs-accordion-active:block hidden w-3 h-3 text-gray-200 group-hover:text-gray-500 dark:text-gray-200" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 11L8.16086 5.31305C8.35239 5.13625 8.64761 5.13625 8.83914 5.31305L15 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-            </button>
-            <div id="hs-basic-with-title-and-arrow-stretched-collapse-five" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-five">
-                <div class="pr-8">
-                <p class="text-gray-200 dark:text-gray-200">
-                    If you lose the link for a theme you purchased, don't panic! We've got you covered. You can login to your account, tap your avatar in the upper right corner, and tap Purchases. If you didn't create a login or can't remember the information, you can use our handy Redownload page, just remember to use the same email you originally made your purchases with.
-                </p>
-                </div>
-            </div>
-            </div>
-
-            <div class="hs-accordion pt-6 pb-3" id="hs-basic-with-title-and-arrow-stretched-heading-six">
-            <button class="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-left text-white transition hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-200" aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-six">
-                Upgrade License Type
-                <svg class="hs-accordion-active:hidden block w-3 h-3 text-gray-200 group-hover:text-gray-500 dark:text-gray-200" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-                <svg class="hs-accordion-active:block hidden w-3 h-3 text-gray-200 group-hover:text-gray-500 dark:text-gray-200" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 11L8.16086 5.31305C8.35239 5.13625 8.64761 5.13625 8.83914 5.31305L15 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-            </button>
-            <div id="hs-basic-with-title-and-arrow-stretched-collapse-six" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-six">
-                <div class="pr-8">
-                <p class="text-gray-200">
-                    There may be times when you need to upgrade your license from the original type you purchased and we have a solution that ensures you can apply your original purchase cost to the new license purchase.
-                </p>
-                </div>
-            </div>
-            </div>
-        </div>
-        <!-- End Accordion -->
+            <UAccordion :items="items" :ui="{ wrapper: 'flex flex-col w-full' }">
+                <template #default="{ item, index, open }">
+                    <UButton color="gray" variant="ghost" class="border-b border-gray-200 dark:border-gray-700" :ui="{ rounded :'rounded-none', padding: { sm:'p-3' } }">
+                        <span class="truncate text-xl">{{ item.label }}</span>
+                        <template #trailing>
+                        <UIcon
+                            name="i-heroicons-chevron-right-20-solid"
+                            class="w-5 h-5 ms-auto transform transition-transform duration-200"
+                            :class="[open && 'rotate-90']"
+                        />
+                        </template>
+                    </UButton>
+                </template>
+        </UAccordion>
         </div>
         <!-- End Col -->
+
     </div>
     <!-- End Grid -->
     </div>
@@ -345,5 +243,12 @@
 definePageMeta({
     middleware: ["is-authenticated"]
 })
+
+const items = [
+    { label: '1. What is Nuxt UI?', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit' }, 
+    { label: '2. Getting Started', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit' }, 
+    { label: '3. Theming', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit' }, 
+    { label: '4. Components', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit' }
+]
 
 </script>

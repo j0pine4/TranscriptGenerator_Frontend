@@ -3,6 +3,9 @@ export default defineAppConfig({
     // primary: 'primary-pink',
     primary: 'purple',
     gray: 'neutral',
+    input: {
+      base: "py-3 px-4 block rounded-md text-black text-sm focus:border-primary focus:ring-primary sm:p-4"
+    },
     card: {
       background: "bg-black dark:bg-black",
       base: 'h-full'
