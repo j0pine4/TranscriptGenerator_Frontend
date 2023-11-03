@@ -11,10 +11,13 @@ export const useAuth = () => {
     const state = useGlobalState()
     const route = useRoute()
     const router = useRouter()
+    const config = useRuntimeConfig()
+    const { $axios } = useNuxtApp();
 
     const login = async (email: string, password: string) => {
-        const {data, error} = await useFetch<string>('/api/auth/login', {
+        const {data, error} = await useFetch<string>(`${config.public.BASE_URL}/api/user/token/`, {
             method: 'POST',
+            credentials: 'include',
             body: {
                 email: email,
                 password: password
@@ -64,7 +67,11 @@ export const useAuth = () => {
     }
 
     const refreshToken = async () => {
-        const {data, error} = await useFetch<string>('/api/auth/refresh')
+        
+        const {data, error} = await useFetch<string>(`${config.public.BASE_URL}/api/user/token/refresh/`, {
+            method: 'POST',
+            credentials: 'include'
+        })
 
         if(error.value){
             console.log(error.value)

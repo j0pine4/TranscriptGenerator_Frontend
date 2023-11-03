@@ -126,11 +126,11 @@
         
             <form @submit.prevent="handleSave()" class="flex flex-col gap-4">
 
-                <input v-model="transcriptSave.title" id="transcript-title" type="text" required maxlength="255" placeholder="Title" class="py-3 px-4 block w-full border-transparent rounded-md text-sm focus:border-primary focus:ring-primary sm:p-4">
+                <UInput v-model="transcriptSave.title" id="transcript-title" type="text" required maxlength="255" :disabled="submitted" placeholder="Title"></UInput>
         
-                <textarea v-model="transcriptSave.description" id="transcript-description" placeholder="Description" maxlength="255" required class="py-3 px-4 block w-full border-transparent rounded-md text-sm focus:border-primary focus:ring-primary sm:p-4"></textarea>
+                <UTextarea v-model="transcriptSave.description" id="transcript-description" placeholder="Description" :disabled="submitted" maxlength="255" required></UTextarea>
 
-                <button type="submit" class="bg-primary p-3 rounded-md text-white w-full"> Save </button>
+                <button type="submit" class="bg-primary p-3 rounded-md text-white w-full" :disabled="submitted"> Save </button>
             
             </form>
         
@@ -261,6 +261,7 @@
     const { removeModals } = useUtils();
     const router = useRouter();
     const route = useRoute();
+    const submitted = ref(false)
     const video_id: string = route.params.id.toString();
 
 
@@ -291,14 +292,12 @@
         window.print()
     }
 
-    const handleSave = () => {
+    const handleSave = async () => {
+        submitted.value = true;
         transcriptSave.value.videoID = video_id;
         transcriptSave.value.content = transcript.value?.transcript!;
 
-        saveDocument(transcriptSave.value, 'TRANSCRIPT')
-
-        // Remove the modal
-        removeModals()
+        await saveDocument(transcriptSave.value, 'TRANSCRIPT')
         router.push('/profile')
     }
 

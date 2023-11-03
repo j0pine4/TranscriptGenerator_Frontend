@@ -2,7 +2,7 @@
 
     <div class="flex justify-between items-center text-white mb-6">
 
-        <h1 class="font-bold text-2xl mb-1"> Welcome {{ user.name }} </h1>
+        <!-- <h1 class="font-bold text-2xl mb-1"> Welcome {{ user.name }} </h1> -->
 
         <button class="border border-primary text-primary rounded w-full p-2 max-w-[300px]"> Update Subscription </button>
 
@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 
-    const { getUserFromToken } = useAuth();
-    const user = getUserFromToken();
+    // const { getUserFromToken } = useAuth();
+    // const user = getUserFromToken();
 
 </script>

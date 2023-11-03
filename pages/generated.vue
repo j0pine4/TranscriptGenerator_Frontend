@@ -84,14 +84,11 @@
   
   <script setup lang="ts">
     import { ClipboardDocumentIcon, PrinterIcon, ArrowLeftIcon, AcademicCapIcon, PencilSquareIcon, DocumentPlusIcon  } from '@heroicons/vue/24/outline'
-    import { API } from '~/composables/api/useAPI';
     import { useGlobalState } from '~/stores/globalState';
 
     const state = useGlobalState()
-    const client = new API();
     const router = useRouter();
-    const { removeModals } = useUtils()
-    const { saveDocument } = useCustomFetch();
+    const { saveDocument, generateNotes } = useCustomFetch();
 
     const isLoading = ref<boolean>(true)
     const saveModal = ref(false)
@@ -113,7 +110,7 @@
             return;
         }
 
-        const {data, error} = await client.generate.create(state.prompt, state.transcript)
+        const {data, error} = await generateNotes(state.prompt, state.transcript)
 
         if (data.value){
             state.generatedNotes = data.value;
@@ -131,9 +128,6 @@
         notesSave.value.content = state.generatedNotes!;
 
         saveDocument(notesSave.value, 'GENERATED')
-
-        // Remove the modal
-        removeModals()
         router.push('/profile')
     }
 

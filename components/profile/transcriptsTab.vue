@@ -8,8 +8,6 @@
 </template>
 
 <script lang="ts" setup>
-const { getUserDocuments } = useCustomFetch();
-
-const {data:transcripts, refetch:refetchTranscripts, isLoading: isLoadingTranscripts} = getUserDocuments('TRANSCRIPT', true)
-
+    const { getUserDocuments } = useCustomFetch();
+    const {data:transcripts, refetch:refetchTranscripts, isLoading: isLoadingTranscripts} = getUserDocuments('TRANSCRIPT', true)
 </script>

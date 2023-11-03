@@ -15,10 +15,10 @@
 
             <!-- Form -->
             <form class="flex flex-col justify-center items-center gap-2 w-full mx-auto" @submit.prevent="handleSubmit">
-                <input v-model="email" type="text" id="hs-hero-name-1" class="py-3 px-4 block w-full border-transparent rounded-md text-sm focus:border-primary focus:ring-primary sm:p-4" placeholder="email">
-                <input v-model="password"  type="password" id="hs-hero-name-1" class="py-3 px-4 block w-full border-transparent rounded-md text-sm focus:border-primary focus:ring-primary sm:p-4" placeholder="Password">
+                <UInput v-model="email" type="text" id="hs-hero-name-1" class="w-full" placeholder="email"></UInput>
+                <UInput v-model="password"  type="password" id="hs-hero-name-1" class="w-full" placeholder="Password"></UInput>
 
-                <!-- <p class="text-red-500"> {{ errorList }} </p> -->
+                <p class="text-red-500"> {{ errorList }} </p>
 
                 <button type="submit" class="bg-primary p-3 rounded-md text-white w-full"> Login </button>
             </form>

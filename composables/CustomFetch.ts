@@ -3,21 +3,22 @@ import { useGlobalState } from "~/stores/globalState"
 import { useAuth } from "./useAuth"
 import { Transcript } from "models/transcript"
 import { Document } from "models/document"
+import { PROMPTS } from "models/prompts"
 
 export const useCustomFetch = () => {
     const state = useGlobalState()
     const config = useRuntimeConfig()
-    const { refreshToken } = useAuth()
+    const { $axios } = useNuxtApp();
 
-    const client = useQueryClient()
+    const axiosTest = () => {
 
-    const fetchWithHeaders = <T>(url: string) => {
-        return $fetch<T>(`${config.public.BASE_URL}/${url}`, {
-            onRequest({request, options}){
-                options.headers = state.user ? {"Authorization" :  `Bearer ${state.user}` } : { }
-            }
+        return useQuery({
+            queryKey: ['axios'],
+            queryFn: () => $axios.get('/set-cookie/').then(resp => { return resp.data }),
+            retry: false
         })
     }
+    
 
     const postWithHeaders = <T>(url: string, params: {}) => {
         return $fetch<T>(`${config.public.BASE_URL}/${url}`, {
@@ -29,43 +30,36 @@ export const useCustomFetch = () => {
         })
     }
 
-    const AuthRetryFunction = async (key: string[], failureCount: number, error: any) => {
-
-
-        if(error.statusCode === 401 && failureCount < 1){
-            console.log("Access Expired, refreshing")
-            await refreshToken()
-            return true
-        }
-
-        if(error.statusCode === 401 && failureCount === 1){
-
-            client.cancelQueries({
-                queryKey: key
-            })
-
-            // Log user out
-
-            return false
-        }
-
-
-        client.cancelQueries({
-            queryKey: key
-        })
-
-        return false
-    }
-
     const getTranscriptByID = (video_id: string) => {
         const url = `api/transcripts/create/${video_id}/`
 
         return useQuery({
             queryKey: ['transcript', video_id],
-            queryFn: () => fetchWithHeaders<Transcript>(url),
-            retry: async (failureCount: number, error: any) => await AuthRetryFunction(['transcript', video_id], failureCount, error),
-            refetchOnWindowFocus: false
+            queryFn: () => $axios.get(url).then(resp => { return resp.data }),
+            // queryFn: () => fetchWithHeaders<Transcript>(url),
+            refetchOnWindowFocus: false,
+            retry: false
         })
+    }
+
+    const generateNotes = async (prompt: PROMPTS, transcript: string | string[]) => {
+        const url = `${config.public.BASE_URL}/api/transcripts/generate/`
+
+        console.log(`Prompt: ${prompt}`)
+        console.log(`Transcript: ${transcript}`)
+
+        let body = {
+            'query' : prompt + transcript
+        }
+
+        const { data, error } = await useFetch< string | string[] >(url, {
+            method: "POST",
+            body: body,
+            credentials: 'include'
+        })
+
+        return { data, error }
+
     }
 
     const getUserDocuments = (type: string, enabled: boolean) => {
@@ -73,10 +67,11 @@ export const useCustomFetch = () => {
 
         return useQuery({
             queryKey: ['documents', type],
-            queryFn: () => fetchWithHeaders<Document[]>(url),
+            queryFn: () => $axios.get(url).then(resp => { return resp.data }),
+            // queryFn: () => fetchWithHeaders<Document[]>(url),
             enabled: enabled,
-            retry: async (failureCount: number, error: any) => await AuthRetryFunction(['documents', type], failureCount, error),
-            refetchOnWindowFocus: false
+            refetchOnWindowFocus: false,
+            retry: false
         })
     }
 
@@ -85,21 +80,20 @@ export const useCustomFetch = () => {
 
         return useQuery({
             queryKey: ['documents', id],
-            queryFn: () => fetchWithHeaders<Document>(url),
-            retry: async (failureCount: number, error: any) => await AuthRetryFunction(['documents', id.toString()], failureCount, error),
-            refetchOnWindowFocus: false
+            queryFn: () => $axios.get<Document>(url).then(resp => { return resp.data }),
+            // queryFn: () => fetchWithHeaders<Document>(url),
+            refetchOnWindowFocus: false,
+            retry: false
         })
     }
 
-    const saveDocument = (documentParams: {}, type: string) => {
+    const saveDocument = async (documentParams: {}, type: string) => {
         const url = `${config.public.BASE_URL}/api/transcripts/documents/create/?type=${type}`
 
-        const { data, error } = useFetch(url, {
+        const { data, error } = await useFetch(url, {
             method: "POST",
             body: documentParams,
-            onRequest({request, options}){
-                options.headers = state.user ? {"Authorization" :  `Bearer ${state.user}` } : { }
-            }
+            credentials: 'include'
         })
 
         return { data, error }
@@ -111,9 +105,7 @@ export const useCustomFetch = () => {
 
         const { data, error } = await useFetch(url, {
             method: "DELETE",
-            onRequest({request, options}){
-                options.headers = state.user ? {"Authorization" :  `Bearer ${state.user}` } : { }
-            }
+            credentials: 'include'
         })
 
         return { data, error }
@@ -123,10 +115,12 @@ export const useCustomFetch = () => {
 
     return {
         getTranscriptByID,
+        generateNotes,
         getUserDocuments,
         saveDocument,
         deleteDocument,
-        getDocumentByID
+        getDocumentByID,
+        axiosTest
     }
 
 }
