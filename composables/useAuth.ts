@@ -1,10 +1,7 @@
-import jwt_decode from "jwt-decode";
+
 import { Register } from "models/authentication";
 import { useGlobalState } from "~/stores/globalState"
-
-export interface User {
-    name: string
-}
+import { User } from "models/user";
 
 export const useAuth = () => {
 
@@ -25,7 +22,7 @@ export const useAuth = () => {
         })
 
         if(data.value){
-            state.user = data.value
+            await getUserInfo();
         }
         
         return {data, error}
@@ -40,7 +37,7 @@ export const useAuth = () => {
         })
 
         if(data.value){
-            state.user = data.value
+            await getUserInfo();
         }
         
         return {data, error}
@@ -52,42 +49,78 @@ export const useAuth = () => {
             '/profile',
         ]
 
-        if(!state.user){
-            throw Error("There is no user logged in, can't log out");
-        }
-
         // Clear user state/tokens
-        state.user = "";
-        await useFetch<string>('/api/auth/logout');
+        state.user = null;
+        state.isLoggedIn = false;
 
-        if(redirectURLS.includes(route.path)){
-            router.push('/')
-        }
-
-    }
-
-    const refreshToken = async () => {
-        
-        const {data, error} = await useFetch<string>(`${config.public.BASE_URL}/api/user/token/refresh/`, {
-            method: 'POST',
+        const {data, error} = await useFetch<string>(`${config.public.BASE_URL}/api/user/token/remove/`, {
+            method: 'GET',
             credentials: 'include'
         })
 
         if(error.value){
-            console.log(error.value)
             return error.value
         }
 
         if(data.value){
-            console.log("User found")
-            state.user = data.value
+            if(redirectURLS.includes(route.path)){
+                router.push('/')
+            } else {
+                return;
+            }
         } 
+    }
+
+    const refreshToken = async () => {
+
+        try{
+            console.log("refreshing token")
+            $axios.post('/api/user/token/refresh/')
+            .then(async  resp => {
+                console.log("Inside response of refreshToken()")
+                console.log(resp)
+                state.isLoggedIn = true;
+                await getUserInfo();
+            })
+
+
+
+        } catch(err: any) {
+
+            console.log('Error in refresh')
+
+            console.log(err)
+
+            if(err.response){
+
+                console.log('Error Response found')
+
+                if(err.response.status == 401){
+                    console.log('Logging user out')
+                    await logout();
+                }
+            }
+            
+            return err
+        }
+
 
     }
 
-    const getUserFromToken = () => {
-        const user: User = jwt_decode(state.user)
-        return user;
+    const getUserInfo = async () => {
+        const {data, error} = await useFetch<User>(`${config.public.BASE_URL}/api/auth/users/me/`, {
+            method: 'GET',
+            credentials: 'include'
+        })
+
+        if(error.value){
+            return error.value
+        }
+
+        if(data.value){
+            state.user = data.value;
+            state.isLoggedIn = true;
+        } 
     }
 
 
@@ -95,7 +128,7 @@ export const useAuth = () => {
         login,
         register,
         logout,
-        getUserFromToken,
+        getUserInfo,
         refreshToken
     }
 

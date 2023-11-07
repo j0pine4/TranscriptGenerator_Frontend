@@ -25,7 +25,6 @@ export default defineEventHandler( async (event) => {
     } catch(err: any) {
         
         if (err.response && err.response.status === 401){
-            console.log("User not authenticated, log out")
             deleteCookie(event, 'refresh')
         }
 

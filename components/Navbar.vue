@@ -85,7 +85,7 @@
 <script setup lang="ts">
     import { useGlobalState } from '~/stores/globalState';
     import { Link } from '~/models/links'
-    const { getUserFromToken, logout } = useAuth()
+    const { logout } = useAuth()
     const state = useGlobalState()
 
     const sideBarOpen = ref(false)
@@ -118,7 +118,5 @@
     const toggleSidebar = () => {
         sideBarOpen.value = !sideBarOpen.value;
     }
-
-    // <h1 v-else> {{ getUserFromToken().name }} </h1>
 
 </script>

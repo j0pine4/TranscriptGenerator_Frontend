@@ -27,9 +27,9 @@
 
 <script lang="ts" setup>
 
-// definePageMeta({
-//     middleware: ["is-authenticated"]
-// })
+definePageMeta({
+    middleware: ["is-authenticated"]
+})
 
 const tabs = [
     {

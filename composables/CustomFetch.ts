@@ -45,9 +45,6 @@ export const useCustomFetch = () => {
     const generateNotes = async (prompt: PROMPTS, transcript: string | string[]) => {
         const url = `${config.public.BASE_URL}/api/transcripts/generate/`
 
-        console.log(`Prompt: ${prompt}`)
-        console.log(`Transcript: ${transcript}`)
-
         let body = {
             'query' : prompt + transcript
         }

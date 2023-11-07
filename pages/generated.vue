@@ -1,19 +1,19 @@
 <template>
 
     <!-- Saving modal -->
-    <UModal v-model="saveModal">
+    <UModal v-model="saveNotesModal">
 
-        <div class="col-span-3">
+        <div class="p-6">
             <h1 class="text-3xl lg:leading-tight font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mb-2">Original Video: </h1>
             <iframe class="w-full h-[250px] mb-6 rounded-xl print:hidden" :src="'https://www.youtube.com/embed/' + state.currentVideoID" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
             <form @submit.prevent="handleSave()" class="flex flex-col gap-4">
 
-                <input v-model="notesSave.title" id="notes-title" type="text" required maxlength="255" placeholder="Title" class="py-3 px-4 block w-full border-transparent rounded-md text-sm focus:border-primary focus:ring-primary sm:p-4">
+                <UInput v-model="notesSave.title" id="notes-title" type="text" required maxlength="255" :disabled="submitted" placeholder="Title"></UInput>
 
-                <textarea v-model="notesSave.description" id="notes-description" placeholder="Description" maxlength="255" required class="py-3 px-4 block w-full border-transparent rounded-md text-sm focus:border-primary focus:ring-primary sm:p-4"></textarea>
+                <UTextarea v-model="notesSave.description" id="notes-description" placeholder="Description" :disabled="submitted" maxlength="255" required></UTextarea>
 
-                <button type="submit" class="bg-primary p-3 rounded-md text-white w-full"> Save </button>
+                <button type="submit" class="bg-primary p-3 rounded-md text-white w-full" :disabled="submitted"> Save </button>
             
             </form>
 
@@ -57,7 +57,7 @@
 
                     <p> · </p>
 
-                    <div class="flex flex-col items-center font-light cursor-pointer hover:text-primary duration-300 transition-all" data-hs-overlay="#notes-save-modal">
+                    <div @click="saveNotesModal = true" class="flex flex-col items-center font-light cursor-pointer hover:text-primary duration-300 transition-all">
                         <DocumentPlusIcon class="h-6 w-6 mb-1"></DocumentPlusIcon>
                         <p> Save </p>
                     </div>
@@ -91,7 +91,8 @@
     const { saveDocument, generateNotes } = useCustomFetch();
 
     const isLoading = ref<boolean>(true)
-    const saveModal = ref(false)
+    const saveNotesModal = ref(false)
+    const submitted = ref(false)
 
     const notesSave = ref({
         videoID: '',
@@ -123,11 +124,12 @@
         window.print()
     }
 
-    const handleSave = () => {
+    const handleSave = async () => {
         notesSave.value.videoID = state.currentVideoID;
         notesSave.value.content = state.generatedNotes!;
+        submitted.value = true;
 
-        saveDocument(notesSave.value, 'GENERATED')
+        await saveDocument(notesSave.value, 'GENERATED')
         router.push('/profile')
     }
 

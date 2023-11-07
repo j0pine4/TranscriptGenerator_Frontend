@@ -14,22 +14,24 @@
             <h1 class="text-3xl sm:text-5xl lg:text-7xl lg:leading-tight font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary text-center mb-4"> Register </h1> 
 
             <!-- Form -->
-            <form class="flex flex-col justify-center items-center gap-2 w-full mx-auto" @submit.prevent="handleSubmit">
+            <form class="flex flex-col justify-center items-center gap-2 w-full mx-auto mb-4" @submit.prevent="handleSubmit">
 
                 <div class="flex justify-between gap-2 w-full">
-                    <input v-model="credentials.firstName" required type="text" id="firstName" class="py-3 px-4 block w-full border-transparent rounded-md text-sm focus:border-primary focus:ring-primary sm:p-4" placeholder="First Name">
-                    <input v-model="credentials.lastName" required type="text" id="lastName" class="py-3 px-4 block w-full border-transparent rounded-md text-sm focus:border-primary focus:ring-primary sm:p-4" placeholder="Last Name">
+                    <UInput :required="true" v-model="credentials.firstName" type="text" class="w-full" placeholder="First Name"></UInput>
+                    <UInput :required="true" v-model="credentials.lastName" type="text" class="w-full" placeholder="Last Name"></UInput>
                 </div>
 
-                <input v-model="credentials.email" required type="email" id="email" class="py-3 px-4 block w-full border-transparent rounded-md text-sm focus:border-primary focus:ring-primary sm:p-4" placeholder="email">
-                <input v-model="credentials.password" required  type="password" id="password" class="py-3 px-4 block w-full border-transparent rounded-md text-sm focus:border-primary focus:ring-primary sm:p-4" placeholder="Password">
-                <input v-model="credentials.password2" required  type="password" id="password2" class="py-3 px-4 block w-full border-transparent rounded-md text-sm focus:border-primary focus:ring-primary sm:p-4" placeholder="Re-enter Password">
+                <UInput :required="true" v-model="credentials.email" type="email" class="w-full" placeholder="Email"></UInput>
+                <UInput :required="true" v-model="credentials.password" type="password" class="w-full" placeholder="Password"></UInput>
+                <UInput :required="true" v-model="credentials.password2" type="password" class="w-full" placeholder="Re-enter Password"></UInput>
 
-                <p v-for="err in errorList" class="text-red-500"> {{ err[0] }} </p>
+                <p v-for="err in errorList" class="text-red-500"> {{ err }} </p>
 
                 <button type="submit" class="bg-primary p-3 rounded-md text-white w-full"> Register </button>
             </form>
             <!-- End Form -->
+
+            <p> Already have an account? <NuxtLink class="text-primary font-bold " to="/auth/login">Login</NuxtLink> </p>
 
         </div>
     </div>
@@ -64,7 +66,6 @@
         const {error} =  await register(credentials.value);
 
         if(error.value){
-            console.log(error.value.data.data)
             errorList.value = error.value.data.data;
             return;
         }

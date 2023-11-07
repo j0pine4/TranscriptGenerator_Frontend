@@ -1,14 +1,18 @@
 import { defineStore } from "pinia"
 import { PROMPTS } from "models/prompts"
+import { User } from "models/user"
 
 export const useGlobalState = defineStore('globalState', () => {
 
-    const user = ref<string>("")
+    const user = ref<User | null>()
+    const isLoggedIn = ref<boolean>(false)
 
     const transcript = ref<string | string[]>("")
     const prompt = ref<PROMPTS>()
     const generatedNotes = ref<string | string[]>("")
     const currentVideoID = ref<string>("")
 
-    return { user, transcript, prompt, generatedNotes, currentVideoID }
+    const throttleError = ref<boolean>(false)
+
+    return { user, isLoggedIn, throttleError, transcript, prompt, generatedNotes, currentVideoID }
   })

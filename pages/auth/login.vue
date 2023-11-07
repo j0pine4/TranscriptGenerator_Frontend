@@ -14,7 +14,7 @@
             <h1 class="text-3xl sm:text-5xl lg:text-7xl lg:leading-tight font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary text-center mb-4"> Login </h1> 
 
             <!-- Form -->
-            <form class="flex flex-col justify-center items-center gap-2 w-full mx-auto" @submit.prevent="handleSubmit">
+            <form class="flex flex-col justify-center items-center gap-2 w-full mx-auto mb-4" @submit.prevent="handleSubmit">
                 <UInput v-model="email" type="text" id="hs-hero-name-1" class="w-full" placeholder="email"></UInput>
                 <UInput v-model="password"  type="password" id="hs-hero-name-1" class="w-full" placeholder="Password"></UInput>
 
@@ -23,6 +23,8 @@
                 <button type="submit" class="bg-primary p-3 rounded-md text-white w-full"> Login </button>
             </form>
             <!-- End Form -->
+
+            <p> Need an account? <NuxtLink class="text-primary font-bold" to="/auth/register">Register</NuxtLink> </p>
 
         </div>
     </div>
@@ -36,16 +38,16 @@
 
     const email = ref<string>("")
     const password = ref<string>("")
-    const errorList = ref<string[]>([])
+    const errorList = ref<string[]| null>()
 
     const handleSubmit = async () => {
 
-        errorList.value = [];
+        errorList.value = null;
 
         const {error} =  await login(email.value, password.value);
 
         if(error.value){
-            errorList.value = error.value.data;
+            errorList.value = error.value.data.detail;
             return;
         }
 

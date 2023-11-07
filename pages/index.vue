@@ -12,9 +12,9 @@
 
 <script setup lang="ts">
 
-// definePageMeta({
-//     middleware: ["is-authenticated"]
-// })
+definePageMeta({
+    middleware: ["is-authenticated"]
+})
 
 
 </script>

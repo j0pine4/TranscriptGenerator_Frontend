@@ -30,7 +30,7 @@
             <p class="font-light"> {{ parseDescription(props.document?.description!) }} </p>
 
             <template #footer>
-                <div class="flex justify-between w-full gap-2 justify-self-end">
+                <div class="flex justify-between w-full gap-2 h-full place-content-end">
                     <NuxtLink :to="`/profile/${props.document?.id}`" class="bg-primary text-white rounded w-full p-2 text-center"> View </NuxtLink>
                     <button @click="setDocument(props.document?.id!)" class="border border-primary text-primary rounded w-full p-2"> Delete </button>
                 </div>
@@ -65,7 +65,6 @@ const confirmDelete = async () => {
 
 const setDocument = (id: number) => {
     deleteModal.value = true;
-    console.log(`Document ID: ${id}`)
     documentID.value = id;
 }
 

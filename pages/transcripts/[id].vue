@@ -117,7 +117,6 @@
     </UModal>
 
     <!-- Saving modal -->
-    <!-- <generate-modal id="transcript-save-modal" header="Save Transcript"> -->
     <UModal v-model="saveModal">
 
         <div class="col-span-3 p-6">
@@ -135,6 +134,25 @@
             </form>
         
         </div>
+    </UModal>
+
+    <UModal v-model="state.throttleError">
+        <div class="col-span-3 p-6">
+            <h1 class="text-3xl lg:leading-tight font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mb-2"> Too many requests... </h1>
+
+            <p class="mb-4"> You have made too many requests to our server... you can try again later or update your subscription level. </p>
+
+            <div class="flex gap-4">
+
+                <NuxtLink to="/pricing">
+                    <UButton variant="outline"> View Pricing </UButton>
+                </NuxtLink>
+
+                <UButton v-if="!state.user"> Register </UButton>
+                <UButton v-if="state.user"> Update Subscription </UButton>
+            </div>
+        
+        </div>    
     </UModal>
     
     <div class="container mx-auto relative">
@@ -190,7 +208,7 @@
 
                     <p> · </p>
 
-                    <div v-if="state.user" @click="saveModal = true" class="flex flex-col items-center font-light cursor-pointer hover:text-primary duration-300 transition-all" data-hs-overlay="#transcript-save-modal">
+                    <div v-if="state.user" @click="saveModal = true" class="flex flex-col items-center font-light cursor-pointer hover:text-primary duration-300 transition-all">
                         <DocumentPlusIcon class="h-6 w-6 mb-1"></DocumentPlusIcon>
                         <p> Save </p>
                     </div>
@@ -244,10 +262,10 @@
     import { useClipboard } from '@vueuse/core'
     import { useGlobalState } from '~/stores/globalState'
     import { PROMPTS } from '~/models/prompts'
-    import { Document } from '~/models/document'
     import { ClipboardDocumentIcon, PrinterIcon, ArrowLeftIcon, AcademicCapIcon, PencilSquareIcon, KeyIcon, MegaphoneIcon, QuestionMarkCircleIcon, GlobeAmericasIcon, DocumentPlusIcon  } from '@heroicons/vue/24/outline'
     const generateModal = ref(false)
     const saveModal = ref(false)
+    const errorModal = ref(false)
 
     const modalStyles = {
         "width": "sm:max-w-5xl",
@@ -258,7 +276,6 @@
     })
 
     const { getTranscriptByID, saveDocument } = useCustomFetch();
-    const { removeModals } = useUtils();
     const router = useRouter();
     const route = useRoute();
     const submitted = ref(false)
@@ -278,9 +295,6 @@
     const {data: transcript, error, isLoading} = getTranscriptByID(video_id)
 
     const handlePrompt = (prompt: PROMPTS) => {
-
-        // Remove the modal
-        removeModals()
 
         state.prompt = prompt;
         state.transcript = transcript.value!.transcript;
