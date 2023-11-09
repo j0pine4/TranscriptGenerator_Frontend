@@ -49,13 +49,13 @@ export const useCustomFetch = () => {
             'query' : prompt + transcript
         }
 
-        const { data, error } = await useFetch< string | string[] >(url, {
+        const { data, error, pending } = await useFetch< string | string[] >(url, {
             method: "POST",
             body: body,
             credentials: 'include'
         })
 
-        return { data, error }
+        return { data, error, pending }
 
     }
 

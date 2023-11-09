@@ -83,8 +83,6 @@ export const useAuth = () => {
                 await getUserInfo();
             })
 
-
-
         } catch(err: any) {
 
             console.log('Error in refresh')
@@ -103,6 +101,32 @@ export const useAuth = () => {
             
             return err
         }
+
+    }
+
+    const refreshTokenAxios = async () => {
+
+        const {data, error} = await useFetch<User>(`${config.public.BASE_URL}/api/user/token/refresh/`, {
+            method: 'POST',
+            credentials: 'include'
+        })
+
+        if(error.value){
+
+            if(error.value.response!.status == 401){
+                console.log('Logging user out')
+                await logout();
+            }
+            console.log('Error in refresh')
+            return error.value
+        }
+
+        if(data.value){
+            console.log("Inside response of refreshToken()")
+            state.isLoggedIn = true;
+            await getUserInfo();
+        } 
+
 
 
     }
@@ -129,7 +153,8 @@ export const useAuth = () => {
         register,
         logout,
         getUserInfo,
-        refreshToken
+        refreshToken,
+        refreshTokenAxios
     }
 
 }

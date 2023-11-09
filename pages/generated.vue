@@ -26,7 +26,7 @@
 
         <!-- Back Button -->
         <NuxtLink to="/" class="print:hidden mt-6 text-white flex gap-2 items-center justify-center w-fit"> 
-            <ArrowLeftIcon class="h-6 w-6  mb-1"></ArrowLeftIcon>
+            <UIcon name="i-heroicons-arrow-left" class="h-6 w-6 mb-1"></UIcon>
             Back 
         </NuxtLink>
         
@@ -44,27 +44,27 @@
                 <div v-if="!isLoading" class="text-white flex gap-4 items-center mb-6 justify-center print:hidden">
 
                     <div class="flex flex-col items-center justify-center font-light cursor-pointer hover:text-primary duration-300 transition-all">
-                        <ClipboardDocumentIcon class="h-6 w-6  mb-1"></ClipboardDocumentIcon>
+                        <UIcon name="i-heroicons-clipboard" class="h-6 w-6 mb-1"></UIcon>
                         <p> Copy </p>
                     </div>
 
                     <p> · </p>
 
                     <div @click="handlePrint()" class="flex flex-col items-center font-light cursor-pointer hover:text-primary duration-300 transition-all">
-                        <PrinterIcon class="h-6 w-6 mb-1"></PrinterIcon>
+                        <UIcon name="i-heroicons-printer" class="h-6 w-6 mb-1"></UIcon>
                         <p> Print </p>
                     </div>
 
                     <p> · </p>
 
                     <div @click="saveNotesModal = true" class="flex flex-col items-center font-light cursor-pointer hover:text-primary duration-300 transition-all">
-                        <DocumentPlusIcon class="h-6 w-6 mb-1"></DocumentPlusIcon>
+                        <UIcon name="i-heroicons-document-plus" class="h-6 w-6 mb-1"></UIcon>
                         <p> Save </p>
                     </div>
 
                 </div>
                 
-                <div v-if="isLoading">
+                <div v-if="isLoading && !errorMsg">
                     <skeleton-loader></skeleton-loader>
                 </div>
 
@@ -83,7 +83,6 @@
   </template>
   
   <script setup lang="ts">
-    import { ClipboardDocumentIcon, PrinterIcon, ArrowLeftIcon, AcademicCapIcon, PencilSquareIcon, DocumentPlusIcon  } from '@heroicons/vue/24/outline'
     import { useGlobalState } from '~/stores/globalState';
 
     const state = useGlobalState()
@@ -91,6 +90,7 @@
     const { saveDocument, generateNotes } = useCustomFetch();
 
     const isLoading = ref<boolean>(true)
+    const errorMsg = ref<any>('')
     const saveNotesModal = ref(false)
     const submitted = ref(false)
 
@@ -111,12 +111,24 @@
             return;
         }
 
-        const {data, error} = await generateNotes(state.prompt, state.transcript)
+        const {data, error, pending} = await generateNotes(state.prompt, state.transcript)
+
+        if (pending.value){
+            errorMsg.value = '';
+            isLoading.value = true;
+        }
+
+        if (error.value){
+            errorMsg.value = error.value;
+            isLoading.value = false;
+        }
 
         if (data.value){
             state.generatedNotes = data.value;
             isLoading.value = false;
+            errorMsg.value = '';
         }
+
 
     }
 

@@ -19,7 +19,7 @@
         <div @click="handlePrompt(PROMPTS.NOTES)" class="cursor-pointer bg-white/5 p-4 transition duration-300 rounded-md hover:bg-white/10">
             <div class="flex">
                 <div class="mt-1.5 flex justify-center flex-shrink-0 rounded-l-xl">
-                    <PencilSquareIcon class="w-5 h-5 text-primary"></PencilSquareIcon>    
+                    <UIcon name="i-heroicons-pencil-square" class="w-5 h-5 text-primary"></UIcon>
                 </div>
 
                 <div class="grow ml-6">
@@ -38,7 +38,7 @@
         <div @click="handlePrompt(PROMPTS.KEY_POINTS)" class="cursor-pointer bg-white/5 p-4 transition duration-300 rounded-md hover:bg-white/10">
             <div class="flex">
                 <div class="mt-1.5 flex justify-center flex-shrink-0 rounded-l-xl">
-                    <KeyIcon class="w-5 h-5 text-primary"></KeyIcon>    
+                    <UIcon name="i-heroicons-key" class="w-5 h-5 text-primary"></UIcon>
                 </div>
 
                 <div class="grow ml-6">
@@ -57,7 +57,7 @@
         <div @click="handlePrompt(PROMPTS.DISCUSSION)" class="cursor-pointer bg-white/5 p-4 transition duration-300 rounded-md hover:bg-white/10">
             <div class="flex">
                 <div class="mt-1.5 flex justify-center flex-shrink-0 rounded-l-xl">
-                    <MegaphoneIcon class="w-5 h-5 text-primary"></MegaphoneIcon>    
+                    <UIcon name="i-heroicons-megaphone" class="w-5 h-5 text-primary"></UIcon>
                 </div>
 
                 <div class="grow ml-6">
@@ -76,7 +76,7 @@
         <div @click="handlePrompt(PROMPTS.Q_AND_A)" class="cursor-pointer bg-white/5 p-4 transition duration-300 rounded-md hover:bg-white/10">
             <div class="flex">
                 <div class="mt-1.5 flex justify-center flex-shrink-0 rounded-l-xl">
-                    <QuestionMarkCircleIcon class="w-5 h-5 text-primary"></QuestionMarkCircleIcon>    
+                    <UIcon name="i-heroicons-question-mark-circle" class="w-5 h-5 text-primary"></UIcon> 
                 </div>
 
                 <div class="grow ml-6">
@@ -95,7 +95,7 @@
         <div @click="handlePrompt(PROMPTS.REAL_WORLD)" class="cursor-pointer bg-white/5 p-4 transition duration-300 rounded-md hover:bg-white/10">
             <div class="flex">
                 <div class="mt-1.5 flex justify-center flex-shrink-0 rounded-l-xl">
-                    <GlobeAmericasIcon class="w-5 h-5 text-primary"></GlobeAmericasIcon>    
+                    <UIcon name="i-heroicons-globe-americas" class="w-5 h-5 text-primary"></UIcon> 
                 </div>
 
                 <div class="grow ml-6">
@@ -121,7 +121,7 @@
 
         <!-- Back Button -->
         <NuxtLink to="/profile" class="print:hidden mt-6 text-white flex gap-2 items-center justify-center w-fit"> 
-            <ArrowLeftIcon class="h-6 w-6  mb-1"></ArrowLeftIcon>
+            <UIcon name="i-heroicons-arrow-left" class="h-6 w-6 mb-1"></UIcon>
             Back 
         </NuxtLink>
         
@@ -139,13 +139,13 @@
                 <div class="text-white flex gap-4 items-center mb-6 justify-center print:hidden">
 
                     <div v-if="document?.content && document!.content!.length < 4000 && document!.type == 'TRANSCRIPT'"  @click="generateModal = true" class="flex flex-col items-center justify-center  text-primary font-bold cursor-pointer hover:scale-105 duration-300 transition-all">
-                        <AcademicCapIcon class="h-6 w-6  mb-1"></AcademicCapIcon>
+                        <UIcon name="i-heroicons-academic-cap" class="h-6 w-6 mb-1"></UIcon>
                         <p> Generate </p>
                     </div>
 
                     <div v-else class="hs-tooltip inline-block">
                         <button type="button" class="flex-col items-center justify-center inline-flex rounded-full text-white/25">
-                            <AcademicCapIcon class="h-6 w-6  mb-1"></AcademicCapIcon>
+                            <UIcon name="i-heroicons-academic-cap" class="h-6 w-6 mb-1"></UIcon>
                             <p> Generate </p>
                             <span class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 max-w-xs transition-opacity inline-block absolute invisible z-10 py-2 px-4 border border-dark-gray bg-black text-white rounded text-xs" role="tooltip">
                                 This transcript is too long for an AI summary, we are working on a solution to this in the near future!
@@ -156,14 +156,14 @@
                     <p> · </p>
 
                     <div class="flex flex-col items-center justify-center font-light cursor-pointer hover:text-primary duration-300 transition-all" @click='copy(document?.content!)'>
-                        <ClipboardDocumentIcon class="h-6 w-6  mb-1"></ClipboardDocumentIcon>
+                        <UIcon name="i-heroicons-clipboard" class="h-6 w-6 mb-1"></UIcon>
                         <p> Copy </p>
                     </div>
 
                     <p> · </p>
 
                     <div @click="handlePrint()" class="flex flex-col items-center font-light cursor-pointer hover:text-primary duration-300 transition-all">
-                        <PrinterIcon class="h-6 w-6 mb-1"></PrinterIcon>
+                        <UIcon name="i-heroicons-printer" class="h-6 w-6 mb-1"></UIcon>
                         <p> Print </p>
                     </div>
 
@@ -203,7 +203,6 @@
     import { useClipboard } from '@vueuse/core'
     import { useGlobalState } from '~/stores/globalState'
     import { PROMPTS } from '~/models/prompts'
-    import { ClipboardDocumentIcon, PrinterIcon, ArrowLeftIcon, AcademicCapIcon, PencilSquareIcon, KeyIcon, MegaphoneIcon, QuestionMarkCircleIcon, GlobeAmericasIcon, DocumentPlusIcon  } from '@heroicons/vue/24/outline'
 
     definePageMeta({
         middleware: ["is-authenticated"]

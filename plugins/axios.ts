@@ -4,7 +4,7 @@ import { useGlobalState } from "~/stores/globalState";
 export default defineNuxtPlugin((nuxtApp) => {
 
     const config = useRuntimeConfig();
-    const { refreshToken } = useAuth();
+    const { refreshTokenAxios } = useAuth();
     const state = useGlobalState();
 
     let api = axios.create({
@@ -28,7 +28,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
         if (error.response.status === 401 && !originalRequest._retry) {
             originalRequest._retry = true;
-            await refreshToken();            
+            await refreshTokenAxios();            
             return api(originalRequest);
         }
 
