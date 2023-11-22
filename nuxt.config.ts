@@ -2,6 +2,9 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@pinia/nuxt', '@vueuse/nuxt', '@nuxt/ui'],
+  colorMode: {
+    preference: 'dark'
+  },
   css: ['/assets/css/styles.css'],
   runtimeConfig: {
     public: {

@@ -9,33 +9,13 @@ export const useCustomFetch = () => {
     const state = useGlobalState()
     const config = useRuntimeConfig()
     const { $axios } = useNuxtApp();
-
-    const axiosTest = () => {
-
-        return useQuery({
-            queryKey: ['axios'],
-            queryFn: () => $axios.get('/set-cookie/').then(resp => { return resp.data }),
-            retry: false
-        })
-    }
     
-
-    const postWithHeaders = <T>(url: string, params: {}) => {
-        return $fetch<T>(`${config.public.BASE_URL}/${url}`, {
-            onRequest({request, options}){
-                options.headers = state.user ? {"Authorization" :  `Bearer ${state.user}` } : { }
-            },
-            method: 'POST',
-            params: params,
-        })
-    }
-
     const getTranscriptByID = (video_id: string) => {
         const url = `api/transcripts/create/${video_id}/`
 
         return useQuery({
             queryKey: ['transcript', video_id],
-            queryFn: () => $axios.get(url).then(resp => { return resp.data }),
+            queryFn: () => $axios.get<Transcript>(url).then(resp => { return resp.data }),
             // queryFn: () => fetchWithHeaders<Transcript>(url),
             refetchOnWindowFocus: false,
             retry: false
@@ -58,6 +38,19 @@ export const useCustomFetch = () => {
         return { data, error, pending }
 
     }
+
+    // const generateNotes = async (prompt: PROMPTS, transcript: string | string[]) => {
+    //     const url = `${config.public.BASE_URL}/api/transcripts/generate/`
+
+    //     let body = {
+    //         'query' : prompt + transcript
+    //     }
+
+    //     return useMutation({
+    //         mutationFn: (documentParams: Document) => $axios.post<string | string[]>(url, body).then(resp => { return resp.data }),
+    //     })
+
+    // }
 
     const getUserDocuments = (type: string, enabled: boolean) => {
         const url = `api/transcripts/documents/?type=${type}`
@@ -87,13 +80,9 @@ export const useCustomFetch = () => {
     const saveDocument = async (documentParams: {}, type: string) => {
         const url = `${config.public.BASE_URL}/api/transcripts/documents/create/?type=${type}`
 
-        const { data, error } = await useFetch(url, {
-            method: "POST",
-            body: documentParams,
-            credentials: 'include'
+        return useMutation({
+            mutationFn: (documentParams: Document) => $axios.post<Document>(url, documentParams).then(resp => { return resp.data }),
         })
-
-        return { data, error }
 
     }
 
@@ -109,6 +98,44 @@ export const useCustomFetch = () => {
 
     }
 
+    const getConversation = (id: number) => {
+        const url = `/api/transcripts/conversations/${id}/`
+
+        return useQuery({
+            queryKey: ['messages', id],
+            queryFn: () => $axios.get(url).then(resp => { return resp.data }),
+            refetchOnWindowFocus: false,
+            retry: false
+        })
+    }
+
+    const getMessagesForConversation = (id: number) => {
+        const url = `/api/transcripts/conversations/${id}/messages/`
+
+        return useQuery({
+            queryKey: ['messages', id],
+            queryFn: () => $axios.get(url).then(resp => { return resp.data }),
+            refetchOnWindowFocus: false,
+            retry: false
+        })
+    }
+
+    const sendNewMessage = async (conversationID: number, message: string) => {
+        const url = `${config.public.BASE_URL}/api/transcripts/conversations/${conversationID}/messages/create/`
+
+        const body = {
+            content: message
+        }
+
+        const { data, error } = await useFetch(url, {
+            method: "POST",
+            credentials: 'include',
+            body: body
+        })
+
+        return { data, error }
+    }
+
 
     return {
         getTranscriptByID,
@@ -117,7 +144,9 @@ export const useCustomFetch = () => {
         saveDocument,
         deleteDocument,
         getDocumentByID,
-        axiosTest
+        getConversation,
+        getMessagesForConversation,
+        sendNewMessage
     }
 
 }

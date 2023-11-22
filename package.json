@@ -21,8 +21,10 @@
     "@heroicons/vue": "^2.0.18",
     "@nuxt/ui": "^2.9.0",
     "@pinia/nuxt": "^0.4.11",
+    "@studio-freight/lenis": "^1.0.27",
     "@tanstack/vue-query": "^4.35.3",
     "axios": "^1.6.0",
+    "gsap": "^3.12.2",
     "jwt-decode": "^3.1.2",
     "pinia": "^2.1.6",
     "preline": "^1.9.0"

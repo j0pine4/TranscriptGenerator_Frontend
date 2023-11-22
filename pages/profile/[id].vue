@@ -143,14 +143,13 @@
                         <p> Generate </p>
                     </div>
 
-                    <div v-else class="hs-tooltip inline-block">
-                        <button type="button" class="flex-col items-center justify-center inline-flex rounded-full text-white/25">
-                            <UIcon name="i-heroicons-academic-cap" class="h-6 w-6 mb-1"></UIcon>
-                            <p> Generate </p>
-                            <span class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 max-w-xs transition-opacity inline-block absolute invisible z-10 py-2 px-4 border border-dark-gray bg-black text-white rounded text-xs" role="tooltip">
-                                This transcript is too long for an AI summary, we are working on a solution to this in the near future!
-                            </span>
-                        </button>
+                    <div v-else>
+                        <UTooltip text="Length Limit: please upgrade subscription to view">
+                            <div class="flex-col items-center justify-center inline-flex rounded-full text-white/25">
+                                <UIcon name="i-heroicons-academic-cap" class="h-6 w-6  mb-1"></UIcon>
+                                <p> Generate </p>
+                            </div>
+                        </UTooltip>
                     </div>
 
                     <p> · </p>
@@ -171,7 +170,7 @@
                 
 
                 <h1 class="text-3xl lg:leading-tight font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mb-2">Original Video: </h1>
-                <iframe class="w-full h-[500px] mb-12 rounded-xl print:hidden" :src="'https://www.youtube.com/embed/' + document?.videoID" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe class="w-full h-[250px] lg:h-[500px] mb-12 rounded-xl print:hidden" :src="'https://www.youtube.com/embed/' + document?.videoID" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 
                 <div v-if="isLoading">
                     <skeleton-loader></skeleton-loader>

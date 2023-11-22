@@ -73,7 +73,6 @@
             </div>
             
             <sidebar></sidebar>
-            
 
         </div>
     </div>
@@ -105,18 +104,14 @@
         router.push('/');
     }
 
+
     const getData = async () => {
 
         if(!state.prompt || !state.transcript){
             return;
         }
 
-        const {data, error, pending} = await generateNotes(state.prompt, state.transcript)
-
-        if (pending.value){
-            errorMsg.value = '';
-            isLoading.value = true;
-        }
+        const {data, error} = await generateNotes(state.prompt, state.transcript)
 
         if (error.value){
             errorMsg.value = error.value;
@@ -129,8 +124,8 @@
             errorMsg.value = '';
         }
 
-
     }
+
 
     const handlePrint = () => {
         window.print()

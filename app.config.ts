@@ -7,8 +7,7 @@ export default defineAppConfig({
       base: "py-3 px-4 block rounded-md text-black text-sm focus:border-primary focus:ring-primary sm:p-4"
     },
     card: {
-      background: "bg-black dark:bg-black",
-      base: 'h-full'
+      base: 'h-full',
     },
     tabs: {
       wrapper: 'flex items-center flex-col justify-center',

@@ -22,13 +22,13 @@
                 <span class="mt-7 font-bold text-3xl md:text-4xl xl:text-5xl text-white">Free</span>
                 <p class="mt-2 text-sm text-gray-500">Get started with basic features</p>
 
-                <ul class="mt-7 space-y-2.5 text-sm">
+                <ul class="mt-7 space-y-2.5 text-sm mx-auto">
                     <li class="flex space-x-2">
                     <svg class="flex-shrink-0 h-5 w-5 text-primary" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
                     </svg>
                     <span class="text-white dark:text-gray-200">
-                        20 Transcripts per hour
+                        15 Transcripts per day
                     </span>
                     </li>
 
@@ -37,7 +37,58 @@
                         <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
                     </svg>
                     <span class="text-white dark:text-gray-200">
-                        10 AI Documents per hour
+                        5 AI Documents per day
+                    </span>
+                    </li>
+
+                    <li class="flex space-x-2">
+                    <svg class="flex-shrink-0 h-5 w-5 text-primary" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
+                    </svg>
+                    <span class="text-white dark:text-gray-200">
+                        20 Minute Max Video Length
+                    </span>
+                    </li>
+
+                </ul>
+
+                <a class="mt-5 inline-flex justify-center items-center gap-2 rounded-lg border-2 border-primary font-semibold text-primary hover:shadow-md focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 transition-all text-sm py-3 px-4 dark:text-violet-500 dark:border-primary dark:hover:border-violet-700" href="#">
+                    Get started
+                </a>
+            </div>
+            <!-- End Card -->
+
+            <!-- Card -->
+            <div class="flex flex-col bg-white/10 border backdrop-blur border-gray-200 text-center rounded-2xl p-4 md:p-8">
+                <h4 class="font-medium text-lg text-white">Premium</h4>
+                <span class="mt-7 font-bold text-3xl md:text-4xl xl:text-5xl text-white">$7.99</span>
+                <p class="mt-2 text-sm text-gray-500">For students on a budget...</p>
+
+                <ul class="mt-7 space-y-2.5 text-sm mx-auto">
+                    <li class="flex space-x-2">
+                    <svg class="flex-shrink-0 h-5 w-5 text-primary" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
+                    </svg>
+                    <span class="text-white dark:text-gray-200">
+                        30 Transcripts per day
+                    </span>
+                    </li>
+
+                    <li class="flex space-x-2">
+                    <svg class="flex-shrink-0 h-5 w-5 text-primary" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
+                    </svg>
+                    <span class="text-white dark:text-gray-200">
+                        15 AI Documents per day
+                    </span>
+                    </li>
+
+                    <li class="flex space-x-2">
+                    <svg class="flex-shrink-0 h-5 w-5 text-primary" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
+                    </svg>
+                    <span class="text-white dark:text-gray-200">
+                        45 Minute Max Video Length
                     </span>
                     </li>
 
@@ -51,30 +102,48 @@
 
             <!-- Card -->
             <div class="flex flex-col bg-white/10 border-2 backdrop-blur border-primary text-center shadow-xl rounded-2xl p-4 md:p-8">
-                <p class="mb-3"><span class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-md text-xs uppercase font-semibold bg-violet-100 text-violet-800 dark:bg-primary dark:text-white">Most popular</span></p>
-                <h4 class="font-medium text-lg text-white dark:text-gray-200">Premium</h4>
+                <p class="mb-3"><span class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-md text-xs uppercase font-semibold bg-violet-100 text-violet-800 dark:bg-primary dark:text-white">Best Value</span></p>
+                <h4 class="font-medium text-lg text-white dark:text-gray-200">Enhanced</h4>
                 <span class="mt-5 font-bold text-3xl md:text-4xl xl:text-5xl text-white dark:text-gray-200">
-                    $9.99
+                    $12.99
                 </span>
-                <p class="mt-2 text-sm text-gray-500">All the basics for starting a new business</p>
+                <p class="mt-2 text-sm text-gray-500">More flexible, with more features</p>
 
                 <ul class="mt-7 space-y-2.5 text-sm">
                     <li class="flex space-x-2">
-                    <svg class="flex-shrink-0 h-5 w-5 text-primary" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
-                    </svg>
-                    <span class="text-white dark:text-gray-200">
-                        30 Transcripts per hour
-                    </span>
+                        <svg class="flex-shrink-0 h-5 w-5 text-primary" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
+                        </svg>
+                        <span class="text-white dark:text-gray-200">
+                            30 Transcripts per day
+                        </span>
                     </li>
 
                     <li class="flex space-x-2">
-                    <svg class="flex-shrink-0 h-5 w-5 text-primary" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
-                    </svg>
-                    <span class="text-white dark:text-gray-200">
-                        20 AI Documents per hour
-                    </span>
+                        <svg class="flex-shrink-0 h-5 w-5 text-primary" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
+                        </svg>
+                        <span class="text-white dark:text-gray-200">
+                            20 AI Documents per day
+                        </span>
+                    </li>
+
+                    <li class="flex space-x-2">
+                        <svg class="flex-shrink-0 h-5 w-5 text-primary" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
+                        </svg>
+                        <span class="text-white dark:text-gray-200">
+                            3 Chatbots per day
+                        </span>
+                    </li>
+
+                    <li class="flex space-x-2">
+                        <svg class="flex-shrink-0 h-5 w-5 text-primary" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
+                        </svg>
+                        <span class="text-white dark:text-gray-200">
+                            60 minute video length
+                        </span>
                     </li>
 
                 </ul>
@@ -87,81 +156,47 @@
 
             <!-- Card -->
             <div class="flex flex-col bg-white/10 border backdrop-blur border-gray-200 text-center rounded-2xl p-4 md:p-8">
-                <h4 class="font-medium text-lg text-white dark:text-gray-200">Enhanced</h4>
-                <span class="mt-5 font-bold text-3xl md:text-4xl xl:text-5xl text-white dark:text-gray-200">
-                    $24.99
-                </span>
-                <p class="mt-2 text-sm text-gray-500">Everything you need for a growing business</p>
-
-                <ul class="mt-7 space-y-2.5 text-sm">
-                    <li class="flex space-x-2">
-                    <svg class="flex-shrink-0 h-5 w-5 text-primary" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
-                    </svg>
-                    <span class="text-white dark:text-gray-200">
-                        5 users
-                    </span>
-                    </li>
-
-                    <li class="flex space-x-2">
-                    <svg class="flex-shrink-0 h-5 w-5 text-primary" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
-                    </svg>
-                    <span class="text-white dark:text-gray-200">
-                        Plan features
-                    </span>
-                    </li>
-
-                    <li class="flex space-x-2">
-                    <svg class="flex-shrink-0 h-5 w-5 text-primary" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
-                    </svg>
-                    <span class="text-white dark:text-gray-200">
-                        Product support
-                    </span>
-                    </li>
-                </ul>
-
-                <a class="mt-5 inline-flex justify-center items-center gap-2 rounded-lg border-2 border-primary font-semibold text-primary hover:shadow-md focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 transition-all text-sm py-3 px-4 dark:text-violet-500 dark:border-primary dark:hover:border-violet-700" href="#">
-                    Get started
-                </a>
-            </div>
-            <!-- End Card -->
-
-            <!-- Card -->
-            <div class="flex flex-col bg-white/10 border backdrop-blur border-gray-200 text-center rounded-2xl p-4 md:p-8">
                 <h4 class="font-medium text-lg text-white dark:text-gray-200">Ultimate</h4>
                 <span class="mt-5 font-bold text-3xl md:text-4xl xl:text-5xl text-white dark:text-gray-200">
-                    $49.99
+                    $29.99
                 </span>
-                <p class="mt-2 text-sm text-gray-500">Everything you need for a growing business</p>
+                <p class="mt-2 text-sm text-gray-500">For the super learner...</p>
 
                 <ul class="mt-7 space-y-2.5 text-sm">
                     <li class="flex space-x-2">
-                    <svg class="flex-shrink-0 h-5 w-5 text-primary" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
-                    </svg>
-                    <span class="text-white dark:text-gray-200">
-                        5 users
-                    </span>
+                        <svg class="flex-shrink-0 h-5 w-5 text-primary" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
+                        </svg>
+                        <span class="text-white dark:text-gray-200">
+                            30 Transcripts per day
+                        </span>
                     </li>
 
                     <li class="flex space-x-2">
-                    <svg class="flex-shrink-0 h-5 w-5 text-primary" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
-                    </svg>
-                    <span class="text-white dark:text-gray-200">
-                        Plan features
-                    </span>
+                        <svg class="flex-shrink-0 h-5 w-5 text-primary" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
+                        </svg>
+                        <span class="text-white dark:text-gray-200">
+                            30 AI Documents per day
+                        </span>
                     </li>
 
                     <li class="flex space-x-2">
-                    <svg class="flex-shrink-0 h-5 w-5 text-primary" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
-                    </svg>
-                    <span class="text-white dark:text-gray-200">
-                        Product support
-                    </span>
+                        <svg class="flex-shrink-0 h-5 w-5 text-primary" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
+                        </svg>
+                        <span class="text-white dark:text-gray-200">
+                            5 Chatbots per day
+                        </span>
+                    </li>
+
+                    <li class="flex space-x-2">
+                        <svg class="flex-shrink-0 h-5 w-5 text-primary" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.5219 4.0949C11.7604 3.81436 12.181 3.78025 12.4617 4.01871C12.7422 4.25717 12.7763 4.6779 12.5378 4.95844L6.87116 11.6251C6.62896 11.91 6.1998 11.94 5.9203 11.6916L2.9203 9.02494C2.64511 8.78033 2.62032 8.35894 2.86493 8.08375C3.10955 7.80856 3.53092 7.78378 3.80611 8.02839L6.29667 10.2423L11.5219 4.0949Z" fill="currentColor"/>
+                        </svg>
+                        <span class="text-white dark:text-gray-200">
+                            80 minute video length
+                        </span>
                     </li>
                 </ul>
 
@@ -245,10 +280,11 @@ definePageMeta({
 })
 
 const items = [
-    { label: '1. What is Nuxt UI?', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit' }, 
-    { label: '2. Getting Started', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit' }, 
-    { label: '3. Theming', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit' }, 
-    { label: '4. Components', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit' }
+    { label: '1. What is this site, and what does it do?', content: 'An innovative educational platform that helps students, educators, and lifelong learners efficiently extract valuable insights from video content. It provides features such as transcript retrieval, summarization, note-taking, and more.' }, 
+    { label: '2. How can I use this site to enhance my learning experience?', content: 'You can quickly access video transcripts, generate concise summaries, take detailed notes, create discussion prompts, and even explore real-life applications of the content you\'re studying.' }, 
+    { label: '3. Is this suitable for all educational levels?', content: 'Yes, we have designed this site to cater to learners of all levels, from college students to educators and professionals seeking knowledge and insights from video content.' }, 
+    { label: '4. Do you support different video platforms besides YouTube?', content: 'Our platform currently focuses on YouTube, but we have plans to expand our compatibility to other video platforms in the near future.' },
+    { label: '5. Is there a mobile app available?', content: 'Currently, we offer a responsive web application that is accessible on both desktop and mobile devices. You can use it conveniently on any device with internet access.' },
 ]
 
 </script>

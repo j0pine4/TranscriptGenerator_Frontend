@@ -1,16 +1,14 @@
 <template>
 
-    <background-elements></background-elements>
-
-    <hero-section></hero-section>
-
-    <div class="max-w-4xl mx-auto mb-12">
-        <about-us></about-us>
-    </div>
+    <home-public v-if="!state.user"></home-public>
+    <home-authenticated v-else></home-authenticated>
     
 </template>
 
 <script setup lang="ts">
+import { useGlobalState } from '~/stores/globalState';
+
+const state = useGlobalState();
 
 definePageMeta({
     middleware: ["is-authenticated"]

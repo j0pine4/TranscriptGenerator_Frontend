@@ -178,13 +178,13 @@
 
                 <div class="text-white flex gap-4 items-center mb-6 justify-center print:hidden">
 
-                    <div v-if="transcript?.tokenCount! < 16000" @click="generateModal = true"  class="flex flex-col items-center justify-center  text-primary font-bold cursor-pointer hover:scale-105 duration-300 transition-all" >
+                    <div v-if="transcript?.allowed" @click="generateModal = true"  class="flex flex-col items-center justify-center  text-primary font-bold cursor-pointer hover:scale-105 duration-300 transition-all" >
                         <UIcon name="i-heroicons-academic-cap" class="h-6 w-6  mb-1"></UIcon>
                         <p> Generate </p>
                     </div>
 
                     <div v-else>
-                        <UTooltip text="This transcript is too long for an AI summary.">
+                        <UTooltip text="Length Limit: please upgrade subscription to view">
                             <div class="flex-col items-center justify-center inline-flex rounded-full text-white/25">
                                 <UIcon name="i-heroicons-academic-cap" class="h-6 w-6  mb-1"></UIcon>
                                 <p> Generate </p>
@@ -213,7 +213,7 @@
                         <p> Save </p>
                     </div>
 
-                    <div v-else class="hs-tooltip inline-block">
+                    <div v-else>
                         <UTooltip text="You must be Logged in to save this transcript.">
                             <div class="flex-col items-center justify-center inline-flex rounded-full text-white/25">
                                 <UIcon name="i-heroicons-document-plus" class="h-6 w-6 mb-1"></UIcon>
@@ -225,11 +225,10 @@
                 </div>
                 
 
-
                 <!-- <h1 v-if="state.transcript"> Tokens: {{ tokenNumbers(state.transcript) }} </h1> -->
 
                 <h1 class="text-3xl lg:leading-tight font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mb-2">Original Video: </h1>
-                <iframe class="w-full h-[500px] mb-12 rounded-xl print:hidden" :src="'https://www.youtube.com/embed/' + video_id" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe class="w-full h-[250px] lg:h-[500px] mb-12 rounded-xl print:hidden" :src="'https://www.youtube.com/embed/' + video_id" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 
                 <div v-if="isLoading">
                     <skeleton-loader></skeleton-loader>
@@ -261,7 +260,6 @@
     import { useClipboard } from '@vueuse/core'
     import { useGlobalState } from '~/stores/globalState'
     import { PROMPTS } from '~/models/prompts'
-    import { ClipboardDocumentIcon, PrinterIcon, ArrowLeftIcon, AcademicCapIcon, PencilSquareIcon, KeyIcon, MegaphoneIcon, QuestionMarkCircleIcon, GlobeAmericasIcon, DocumentPlusIcon  } from '@heroicons/vue/24/outline'
     const generateModal = ref(false)
     const saveModal = ref(false)
     const errorModal = ref(false)
@@ -294,7 +292,6 @@
     const {data: transcript, error, isLoading} = getTranscriptByID(video_id)
 
     const handlePrompt = (prompt: PROMPTS) => {
-
         state.prompt = prompt;
         state.transcript = transcript.value!.transcript;
         state.currentVideoID = video_id;
