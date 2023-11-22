@@ -83,6 +83,8 @@ export const useAuth = () => {
                 await getUserInfo();
             })
 
+            return "Success"
+
         } catch(err: any) {
 
             console.log('Error in refresh')

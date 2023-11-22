@@ -7,7 +7,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
 
     if(!state.user) {
         console.log("No user found")
-        await refreshToken();
+        return await refreshToken();
     }
 
 })
