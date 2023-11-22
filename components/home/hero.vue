@@ -36,7 +36,7 @@ onMounted(() => {
 
     requestAnimationFrame(raf)
 
-    gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollTrigger); 
 
     const timeline = gsap.timeline({
         scrollTrigger: {
