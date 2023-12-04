@@ -5,10 +5,10 @@
                 <img :src="selectedProject.src" alt="" class="object-cover h-full w-full rounded-lg">
             </div>
             <div class="column">
-                <p> Nuxt is a free and open-source framework with an intuitive and extendable way to create type-safe, performant and production-grade full-stack web applications and websites with Vue.js. </p>
+                <p> Tailor your learning journey with personalized summaries, adapting to individual preferences and maximizing engagement for a truly customized educational experience. </p>
             </div>
             <div class="column items-end font-light">
-                <p> Build more, build faster. All without the odd bugs and CLI commands. With the wide ecosystem of Vue 3, Nuxt 3 and vanilla javascript plugins work without issue. </p>
+                <p> Retrieve key insights effortlessly through our platform, offering a user-friendly interface for quick access to intelligent and well-organized video summaries whenever needed. </p>
             </div>
         </div>
 

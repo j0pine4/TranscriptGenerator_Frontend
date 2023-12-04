@@ -74,10 +74,8 @@ export const useAuth = () => {
     const refreshToken = async () => {
 
         try{
-            console.log("refreshing token")
             $axios.post('/api/user/token/refresh/')
             .then(async  resp => {
-                console.log("Inside response of refreshToken()")
                 console.log(resp)
                 state.isLoggedIn = true;
                 await getUserInfo();
@@ -85,16 +83,9 @@ export const useAuth = () => {
 
         } catch(err: any) {
 
-            console.log('Error in refresh')
-
-            console.log(err)
-
             if(err.response){
 
-                console.log('Error Response found')
-
-                if(err.response.status == 401){
-                    console.log('Logging user out')
+                if(err.response.status == 401 || err.response.status == 400){
                     await logout();
                 }
             }
@@ -113,16 +104,13 @@ export const useAuth = () => {
 
         if(error.value){
 
-            if(error.value.response!.status == 401){
-                console.log('Logging user out')
+            if(error.value.response!.status == 401 || error.value.response!.status == 400 ){
                 await logout();
             }
-            console.log('Error in refresh')
             return error.value
         }
 
         if(data.value){
-            console.log("Inside response of refreshToken()")
             state.isLoggedIn = true;
             await getUserInfo();
         } 

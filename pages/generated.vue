@@ -41,7 +41,7 @@
 
                 <hr class="mb-6 print:hidden">
 
-                <div v-if="!isLoading" class="text-white flex gap-4 items-center mb-6 justify-center print:hidden">
+                <div v-if="generateMutation.status.value != 'loading'" class="text-white flex gap-4 items-center mb-6 justify-center print:hidden">
 
                     <div class="flex flex-col items-center justify-center font-light cursor-pointer hover:text-primary duration-300 transition-all">
                         <UIcon name="i-heroicons-clipboard" class="h-6 w-6 mb-1"></UIcon>
@@ -64,7 +64,7 @@
 
                 </div>
                 
-                <div v-if="isLoading && !errorMsg">
+                <div v-if="generateMutation.status.value == 'loading'">
                     <skeleton-loader></skeleton-loader>
                 </div>
 
@@ -77,19 +77,17 @@
         </div>
     </div>
 
-
     <!-- End Hero -->
   </template>
   
   <script setup lang="ts">
+    import { useMutation } from '@tanstack/vue-query';
     import { useGlobalState } from '~/stores/globalState';
 
     const state = useGlobalState()
     const router = useRouter();
     const { saveDocument, generateNotes } = useCustomFetch();
 
-    const isLoading = ref<boolean>(true)
-    const errorMsg = ref<any>('')
     const saveNotesModal = ref(false)
     const submitted = ref(false)
 
@@ -104,44 +102,30 @@
         router.push('/');
     }
 
-
-    const getData = async () => {
-
-        if(!state.prompt || !state.transcript){
-            return;
+    // Create Mutations
+    const generateMutation = generateNotes(state.prompt!, state.transcript);
+    const saveDocMutation = useMutation({
+        mutationFn: () => saveDocument(notesSave.value, 'GENERATED'),
+        onSuccess: (resp) => {
+            console.log(`Mutation Done`)
+            router.push('/profile')
         }
-
-        const {data, error} = await generateNotes(state.prompt, state.transcript)
-
-        if (error.value){
-            errorMsg.value = error.value;
-            isLoading.value = false;
-        }
-
-        if (data.value){
-            state.generatedNotes = data.value;
-            isLoading.value = false;
-            errorMsg.value = '';
-        }
-
-    }
-
+    }) 
 
     const handlePrint = () => {
         window.print()
     }
-
-    const handleSave = async () => {
+    
+    
+    const handleSave = () => {
         notesSave.value.videoID = state.currentVideoID;
         notesSave.value.content = state.generatedNotes!;
         submitted.value = true;
-
-        await saveDocument(notesSave.value, 'GENERATED')
-        router.push('/profile')
+        saveDocMutation.mutate();
     }
-
-    getData();
-
+    
+    // Generate Doc on page load
+    generateMutation.mutate();
     
   </script>
 

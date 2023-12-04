@@ -8,7 +8,7 @@ export const useGlobalState = defineStore('globalState', () => {
     const isLoggedIn = ref<boolean>(false)
 
     const transcript = ref<string | string[]>("")
-    const prompt = ref<PROMPTS>()
+    const prompt = ref<PROMPTS | string>()
     const generatedNotes = ref<string | string[]>("")
     const currentVideoID = ref<string>("")
 

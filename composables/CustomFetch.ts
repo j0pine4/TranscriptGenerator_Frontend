@@ -8,6 +8,7 @@ import { PROMPTS } from "models/prompts"
 export const useCustomFetch = () => {
     const state = useGlobalState()
     const config = useRuntimeConfig()
+    const router = useRouter();
     const { $axios } = useNuxtApp();
     
     const getTranscriptByID = (video_id: string) => {
@@ -22,35 +23,21 @@ export const useCustomFetch = () => {
         })
     }
 
-    const generateNotes = async (prompt: PROMPTS, transcript: string | string[]) => {
-        const url = `${config.public.BASE_URL}/api/transcripts/generate/`
+    const generateNotes = (prompt: PROMPTS | string, transcript: string | string[]) => {
+        const url = `/api/transcripts/generate/`
 
         let body = {
             'query' : prompt + transcript
         }
 
-        const { data, error, pending } = await useFetch< string | string[] >(url, {
-            method: "POST",
-            body: body,
-            credentials: 'include'
+        return useMutation({
+            mutationFn: () => $axios.post<string | string[]>(url, body).then(resp => { return resp.data }),
+            onSuccess: (resp) => {
+                state.generatedNotes = resp;
+            }
         })
 
-        return { data, error, pending }
-
     }
-
-    // const generateNotes = async (prompt: PROMPTS, transcript: string | string[]) => {
-    //     const url = `${config.public.BASE_URL}/api/transcripts/generate/`
-
-    //     let body = {
-    //         'query' : prompt + transcript
-    //     }
-
-    //     return useMutation({
-    //         mutationFn: (documentParams: Document) => $axios.post<string | string[]>(url, body).then(resp => { return resp.data }),
-    //     })
-
-    // }
 
     const getUserDocuments = (type: string, enabled: boolean) => {
         const url = `api/transcripts/documents/?type=${type}`
@@ -77,13 +64,9 @@ export const useCustomFetch = () => {
         })
     }
 
-    const saveDocument = async (documentParams: {}, type: string) => {
-        const url = `${config.public.BASE_URL}/api/transcripts/documents/create/?type=${type}`
-
-        return useMutation({
-            mutationFn: (documentParams: Document) => $axios.post<Document>(url, documentParams).then(resp => { return resp.data }),
-        })
-
+    const saveDocument = (documentParams: {}, type: string) => {
+        const url = `/api/transcripts/documents/create/?type=${type}`
+        return $axios.post<Document>(url, documentParams).then(resp => { return resp.data })
     }
 
     const deleteDocument = async (id: number) => {

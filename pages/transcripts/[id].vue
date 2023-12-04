@@ -112,7 +112,72 @@
             </div>
             <!-- End Card -->
 
+            <!-- Card -->
+            <div @click="handlePrompt(PROMPTS.QUIZ)" class="cursor-pointer bg-white/5 p-4 transition duration-300 rounded-md hover:bg-white/10">
+                <div class="flex">
+                    <div class="mt-1.5 flex justify-center flex-shrink-0 rounded-l-xl">
+                        <UIcon name="i-heroicons-question-mark-circle" class="w-5 h-5 text-primary"></UIcon> 
+                    </div>
+
+                    <div class="grow ml-6">
+                        <h3 class="text font-bold text-white">
+                            Create a Quiz
+                        </h3>
+                        <p class="mt-1 text-sm font-light text-gray-400">
+                            Test your knowlege by building a multiple choice quiz based on this video.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- End Card -->
+
+            <!-- Card -->
+            <div @click="handlePrompt(PROMPTS.FLASH_CARDS)" class="cursor-pointer bg-white/5 p-4 transition duration-300 rounded-md hover:bg-white/10">
+                <div class="flex">
+                    <div class="mt-1.5 flex justify-center flex-shrink-0 rounded-l-xl">
+                        <UIcon name="i-heroicons-book-open" class="w-5 h-5 text-primary"></UIcon> 
+                    </div>
+
+                    <div class="grow ml-6">
+                        <h3 class="text font-bold text-white">
+                            Flash Cards
+                        </h3>
+                        <p class="mt-1 text-sm font-light text-gray-400">
+                            Pull key terms and their definitions from the transcript
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- End Card -->
+
+            <!-- Card -->
+            <!-- <div @click="handlePrompt(PROMPTS.MIND_MAP)" class="cursor-pointer bg-white/5 p-4 transition duration-300 rounded-md hover:bg-white/10">
+                <div class="flex">
+                    <div class="mt-1.5 flex justify-center flex-shrink-0 rounded-l-xl">
+                        <UIcon name="i-heroicons-map" class="w-5 h-5 text-primary"></UIcon> 
+                    </div>
+
+                    <div class="grow ml-6">
+                        <h3 class="text font-bold text-white">
+                            Mind Map
+                        </h3>
+                        <p class="mt-1 text-sm font-light text-gray-400">
+                            Mind Map
+                        </p>
+                    </div>
+                </div>
+            </div> -->
+            <!-- End Card -->
+
+            
         </div>
+
+        
+        <h1 class="px-4 pb-2"> Custom Prompt </h1>
+        <form class="w-full flex px-4 pb-4 gap-4" @submit.prevent="handlePrompt(customPrompt)">
+            <UInput :required="true" class="w-full" v-model="customPrompt"></UInput>
+            <UButton type="submit" label="Submit"></UButton>
+        </form>
 
     </UModal>
 
@@ -291,10 +356,14 @@
     const state = useGlobalState()
     const {data: transcript, error, isLoading} = getTranscriptByID(video_id)
 
-    const handlePrompt = (prompt: PROMPTS) => {
+    const customPrompt = ref("")
+
+    const handlePrompt = (prompt: PROMPTS | string) => {
         state.prompt = prompt;
         state.transcript = transcript.value!.transcript;
         state.currentVideoID = video_id;
+
+        console.log(`Sending transcript: ${state.transcript} to generate page with prompt of ${state.prompt}`)
         router.push('/generated');
     }
 
