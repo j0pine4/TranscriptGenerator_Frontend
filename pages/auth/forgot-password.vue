@@ -15,18 +15,15 @@
 
             <!-- Form -->
             <form class="flex flex-col justify-center items-center gap-2 w-full mx-auto mb-4" @submit.prevent="handleSubmit">
+                <p v-if="submitted" class="text-primary text-center mb-4"> An email has been sent to the address listed below </p>
+
                 <UInput v-model="email" type="text" id="hs-hero-name-1" class="w-full" placeholder="email"></UInput>
-                <UInput v-model="password"  type="password" id="hs-hero-name-1" class="w-full" placeholder="Password"></UInput>
 
-                <p v-if="errorMSG" class="text-red-500"> {{ errorMSG }} </p>
-
-                <NuxtLink class="text-primary font-bold" to="/auth/forgot-password">Forgot Password?</NuxtLink> 
-
-                <button type="submit" class="bg-primary p-3 rounded-md text-white w-full"> Login </button>
+                <button :disabled="submitted" type="submit" class="bg-primary p-3 rounded-md text-white w-full" :class="submitted ? 'bg-gray-600' : ''"> Send Reset Email </button>
             </form>
             <!-- End Form -->
 
-            <p> Need an account? <NuxtLink class="text-primary font-bold" to="/auth/forgot-password">Register</NuxtLink> </p>
+            <p> Need an account? <NuxtLink class="text-primary font-bold" to="/auth/register">Register</NuxtLink> </p>
 
         </div>
     </div>
@@ -37,26 +34,22 @@
  
     const router = useRouter();
     const supabase = useSupabaseClient();
+    const config = useRuntimeConfig();
 
-    const email = ref<string>("")
-    const password = ref<string>("")
-    const errorMSG = ref<string>("")
+    const email = ref<string>("");
+    const submitted = ref<boolean>(false);
 
     const handleSubmit = async () => {
 
-        errorMSG.value = "";
+        submitted.value = false;
 
-        const { error } = await supabase.auth.signInWithPassword({
-            email: email.value,
-            password: password.value,
+        await supabase.auth.resetPasswordForEmail(email.value, {
+            redirectTo: `${config.public.FRONTEND_BASE_URL}/auth/reset-password`
         })
 
-        if(error){
-            errorMSG.value = error.message
-            return
-        }
-        
-        router.push("/")
+        submitted.value = true;
+
     }
+
 </script>
 

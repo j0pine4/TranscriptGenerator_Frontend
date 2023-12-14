@@ -1,18 +1,17 @@
 <template>
 
-    <home-public v-if="!state.user"></home-public>
+    <home-public v-if="!user"></home-public>
     <home-authenticated v-else></home-authenticated>
     
 </template>
 
 <script setup lang="ts">
-import { useGlobalState } from '~/stores/globalState';
 
-const state = useGlobalState();
+const user = useSupabaseUser();
 
-definePageMeta({
-    middleware: ["is-authenticated"]
-})
+// definePageMeta({
+//     middleware: ["is-authenticated"]
+// })
 
 
 </script>

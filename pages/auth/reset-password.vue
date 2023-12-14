@@ -15,19 +15,14 @@
 
             <!-- Form -->
             <form class="flex flex-col justify-center items-center gap-2 w-full mx-auto mb-4" @submit.prevent="handleSubmit">
-                <UInput v-model="email" type="text" id="hs-hero-name-1" class="w-full" placeholder="email"></UInput>
-                <UInput v-model="password"  type="password" id="hs-hero-name-1" class="w-full" placeholder="Password"></UInput>
+                <UInput v-model="password"  type="password" class="w-full" placeholder="New Password"></UInput>
+                <UInput v-model="password2"  type="password" class="w-full" placeholder="Repeat New Password"></UInput>
 
                 <p v-if="errorMSG" class="text-red-500"> {{ errorMSG }} </p>
 
-                <NuxtLink class="text-primary font-bold" to="/auth/forgot-password">Forgot Password?</NuxtLink> 
-
-                <button type="submit" class="bg-primary p-3 rounded-md text-white w-full"> Login </button>
+                <button type="submit" class="bg-primary p-3 rounded-md text-white w-full" > Reset Password </button>
             </form>
             <!-- End Form -->
-
-            <p> Need an account? <NuxtLink class="text-primary font-bold" to="/auth/forgot-password">Register</NuxtLink> </p>
-
         </div>
     </div>
 
@@ -38,24 +33,21 @@
     const router = useRouter();
     const supabase = useSupabaseClient();
 
-    const email = ref<string>("")
     const password = ref<string>("")
+    const password2 = ref<string>("")
     const errorMSG = ref<string>("")
 
+    
     const handleSubmit = async () => {
+        errorMSG.value = ""
 
-        errorMSG.value = "";
-
-        const { error } = await supabase.auth.signInWithPassword({
-            email: email.value,
-            password: password.value,
-        })
-
-        if(error){
-            errorMSG.value = error.message
-            return
+        if (password.value != password2.value){
+            errorMSG.value = "Passwords do not match" 
+            return;
         }
-        
+
+        await supabase.auth.updateUser({ password: password.value })
+
         router.push("/")
     }
 </script>

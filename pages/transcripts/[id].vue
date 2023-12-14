@@ -213,8 +213,8 @@
                     <UButton variant="outline"> View Pricing </UButton>
                 </NuxtLink>
 
-                <UButton v-if="!state.user"> Register </UButton>
-                <UButton v-if="state.user"> Update Subscription </UButton>
+                <UButton v-if="!user"> Register </UButton>
+                <UButton v-if="user"> Update Subscription </UButton>
             </div>
         
         </div>    
@@ -273,7 +273,7 @@
 
                     <p> · </p>
 
-                    <div v-if="state.user" @click="saveModal = true" class="flex flex-col items-center font-light cursor-pointer hover:text-primary duration-300 transition-all">
+                    <div v-if="user" @click="saveModal = true" class="flex flex-col items-center font-light cursor-pointer hover:text-primary duration-300 transition-all">
                         <UIcon name="i-heroicons-document-plus" class="h-6 w-6 mb-1"></UIcon>
                         <p> Save </p>
                     </div>
@@ -328,6 +328,7 @@
     const generateModal = ref(false)
     const saveModal = ref(false)
     const errorModal = ref(false)
+    const user = useSupabaseUser()
 
     const modalStyles = {
         "width": "sm:max-w-5xl",

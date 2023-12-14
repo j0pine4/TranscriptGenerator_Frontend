@@ -25,7 +25,7 @@
                 <UInput :required="true" v-model="credentials.password" type="password" class="w-full" placeholder="Password"></UInput>
                 <UInput :required="true" v-model="credentials.password2" type="password" class="w-full" placeholder="Re-enter Password"></UInput>
 
-                <p v-for="err in errorList" class="text-red-500"> {{ err }} </p>
+                <p class="text-red-500"> {{ errorMSG }} </p>
 
                 <button type="submit" class="bg-primary p-3 rounded-md text-white w-full"> Register </button>
             </form>
@@ -41,8 +41,8 @@
 <script lang="ts" setup>
     import { Register } from '~/models/authentication'
  
-    const { login, register } = useAuth();
     const router = useRouter();
+    const supabase = useSupabaseClient()
 
     const credentials = ref<Register>({
         email: "",
@@ -52,26 +52,32 @@
         lastName: "",
     })
 
-    const errorList = ref<string[]>([])
+    const errorMSG = ref<string>()
 
     const handleSubmit = async () => {
 
-        errorList.value = [];
-
         if(credentials.value.password !== credentials.value.password2){
-            errorList.value.push('Passwords do not match')
+            errorMSG.value ='Passwords do not match'
             return;
         }
 
-        const {error} =  await register(credentials.value);
+        const { data, error } = await supabase.auth.signUp({
+            email: credentials.value.email,
+            password: credentials.value.password,
+            options: {
+                data: {
+                    firstName: credentials.value.firstName,
+                    lastName: credentials.value.lastName,
+                }
+            }
+        })
 
-        if(error.value){
-            errorList.value = error.value.data.data;
+        if(error){
+            errorMSG.value = error.message;
             return;
-        }
-
-        router.push('/')
-
+        } 
+        
+        router.push('/auth/login')
     }
 </script>
 

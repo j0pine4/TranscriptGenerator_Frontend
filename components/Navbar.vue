@@ -9,7 +9,7 @@
             </div>
 
             <!-- Authenticated -->
-            <div v-if="state.user" class="hidden md:flex gap-4 items-center"> 
+            <div v-if="user" class="hidden md:flex gap-4 items-center"> 
                 <div>
                     <NuxtLink to="/profile" class="flex flex-col items-center hover:text-primary">
                         <UIcon name="i-heroicons-user" class="h-6 w-6"></UIcon>
@@ -17,7 +17,7 @@
                     </NuxtLink>
                 </div>
                 
-                <div @click="logout()" class="flex flex-col items-center hover:text-primary cursor-pointer">
+                <div @click="supabase.auth.signOut()" class="flex flex-col items-center hover:text-primary cursor-pointer">
                     <UIcon name="i-heroicons-arrow-top-right-on-square" class="h-6 w-6"></UIcon>
                     <p> Logout </p>
                 </div>
@@ -54,15 +54,15 @@
                 </NuxtLink>
 
                 <!-- Authenticated -->
-                <div v-if="state.user">
+                <div v-if="user">
                     <NuxtLink to="/profile" class="flex items-center gap-4">
                         <UIcon name="i-heroicons-user" class="h-8 w-8 text-white/50"></UIcon>
                         <span> My Profile </span>
                     </NuxtLink>
                 </div>
                 
-                <div v-if="state.user">
-                    <div @click="logout()" class="flex items-center gap-4">
+                <div v-if="user">
+                    <div @click="supabase.auth.signOut()" class="flex items-center gap-4">
                         <UIcon name="i-heroicons-arrow-top-right-on-square" class="h-8 w-8 text-white/50"></UIcon>
                         <span> Logout </span>
                     </div>
@@ -70,7 +70,7 @@
                     
 
                 <!-- Not Authenticated -->
-                <div v-if="!state.user" class="flex gap-4 items-center"> 
+                <div v-if="!user" class="flex gap-4 items-center"> 
                     <div> <NuxtLink to="/auth/login">Login</NuxtLink> </div>
                     <div>|</div>
                     <div> <NuxtLink to="/auth/login">Register</NuxtLink> </div>
@@ -83,10 +83,9 @@
 </template>
 
 <script setup lang="ts">
-    import { useGlobalState } from '~/stores/globalState';
     import { Link } from '~/models/links'
-    const { logout } = useAuth()
-    const state = useGlobalState()
+    const user = useSupabaseUser()
+    const supabase = useSupabaseClient()
 
     const sideBarOpen = ref(false)
     defineShortcuts({
