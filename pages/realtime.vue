@@ -20,21 +20,10 @@
                 <hr class="mb-6 print:hidden">
 
                 <div class="text-white flex flex-col gap-4 items-center mb-6 justify-center print:hidden">
-<!-- 
+
                     <UCard v-for="item in data">
                         <p> {{ item.body }} </p>
-                    </UCard> -->
-
-                    <div class="flex gap-4">
-                        <UInput type="number" v-model="input"></UInput>
-                        <UButton @click="refreshUsers()"> Fetch </UButton>
-                    </div>
-
-                    <UCard v-for="user in users">
-                        <p> {{ user }} </p>
                     </UCard>
-
-                
 
                 </div>
             
@@ -53,10 +42,6 @@
 
     const user = useSupabaseUser()
     const client = useSupabaseClient()
-
-    const { wrapperTest } = useCustomFetch();
-
-    const input = ref(1)
 
     let realtimeChannel: RealtimeChannel
 
@@ -89,10 +74,6 @@
     onUnmounted(() => {
     client.removeChannel(realtimeChannel)
     })
-
-    const {data:users, error, refresh:refreshUsers} = await wrapperTest({
-        id: input.value
-    });
 
 
   </script>

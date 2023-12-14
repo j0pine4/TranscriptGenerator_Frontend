@@ -119,15 +119,6 @@ export const useCustomFetch = () => {
         return { data, error }
     }
 
-    const wrapperTest = async (params:any) => {
-        const {data, error, refresh} = await useFetch('https://jsonplaceholder.typicode.com/users', 
-        {
-            params: params,
-            lazy: false
-        })
-        return {data, error, refresh}
-    }
-
     return {
         getTranscriptByID,
         generateNotes,
@@ -137,8 +128,7 @@ export const useCustomFetch = () => {
         getDocumentByID,
         getConversation,
         getMessagesForConversation,
-        sendNewMessage,
-        wrapperTest
+        sendNewMessage
     }
 
 }
