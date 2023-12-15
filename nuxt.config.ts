@@ -2,6 +2,13 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@pinia/nuxt', '@vueuse/nuxt', '@nuxt/ui', '@nuxtjs/supabase'],
+  app: {
+    head: {
+      meta: [
+        { name: 'viewport', content: 'width=device-width, initial-scale=1'}
+      ]
+    }
+  },
   supabase: {
     redirect: false,
   },
