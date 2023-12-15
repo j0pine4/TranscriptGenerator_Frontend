@@ -8,9 +8,8 @@ import { PROMPTS } from "models/prompts"
 export const useCustomFetch = () => {
     const state = useGlobalState()
     const config = useRuntimeConfig()
-    const router = useRouter();
     const { $axios } = useNuxtApp();
-    
+
     const getTranscriptByID = (video_id: string) => {
         const url = `api/transcripts/create/${video_id}/`
 
@@ -64,10 +63,11 @@ export const useCustomFetch = () => {
         })
     }
 
-    const saveDocument = (documentParams: {}, type: string) => {
+    const saveDocument =  (documentParams: {}, type: string) => {
         const url = `/api/transcripts/documents/create/?type=${type}`
         return $axios.post<Document>(url, documentParams).then(resp => { return resp.data })
     }
+
 
     const deleteDocument = async (id: number) => {
         const url = `${config.public.BASE_URL}/api/transcripts/documents/${id}/`
