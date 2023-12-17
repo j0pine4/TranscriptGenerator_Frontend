@@ -1,6 +1,6 @@
 <template>
 
-    <div class="max-w-4xl mx-auto py-24">
+    <div class="max-w-5xl mx-auto py-24">
         <home-public-hero></home-public-hero>
         <home-public-features></home-public-features>
     </div>
