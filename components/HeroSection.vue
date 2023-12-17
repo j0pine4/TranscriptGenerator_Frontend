@@ -17,7 +17,7 @@
 
             <!-- Form -->
             <form class="flex justify-center items-center gap-2 w-full max-w-[40rem] mx-auto" @submit.prevent="handleSubmit()">
-                <UInput :required="true" v-model="input" color="white" type="text" class="w-full" placeholder="Paste Youtube Link..." />
+                <UInput size="xl" :required="true" v-model="input" color="white" type="text" class="w-full" placeholder="Paste Youtube Link..." />
                 <button type="submit" class="bg-primary px-3 rounded-md h-full text-white md:w-60"> Submit </button>
             </form>
             <!-- End Form -->

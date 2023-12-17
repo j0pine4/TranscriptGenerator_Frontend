@@ -275,10 +275,6 @@
 
 <script setup lang="ts">
 
-definePageMeta({
-    middleware: ["is-authenticated"]
-})
-
 const items = [
     { label: '1. What is this site, and what does it do?', content: 'An innovative educational platform that helps students, educators, and lifelong learners efficiently extract valuable insights from video content. It provides features such as transcript retrieval, summarization, note-taking, and more.' }, 
     { label: '2. How can I use this site to enhance my learning experience?', content: 'You can quickly access video transcripts, generate concise summaries, take detailed notes, create discussion prompts, and even explore real-life applications of the content you\'re studying.' }, 

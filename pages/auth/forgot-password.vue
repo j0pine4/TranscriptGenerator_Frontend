@@ -39,6 +39,10 @@
     const email = ref<string>("");
     const submitted = ref<boolean>(false);
 
+    definePageMeta({
+        middleware: ["auth"]
+    })
+
     const handleSubmit = async () => {
 
         submitted.value = false;

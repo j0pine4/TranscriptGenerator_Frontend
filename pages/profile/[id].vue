@@ -204,7 +204,7 @@
     import { PROMPTS } from '~/models/prompts'
 
     definePageMeta({
-        middleware: ["is-authenticated"]
+        middleware: ["auth"]
     })
 
     const { getDocumentByID } = useCustomFetch()

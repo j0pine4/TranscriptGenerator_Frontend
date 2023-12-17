@@ -48,13 +48,13 @@
             </template>
 
             <div class="flex flex-col gap-6  mt-12">
-                <NuxtLink v-for="link in navLinks" :to="link.url" class="flex items-center gap-4">
+                <NuxtLink @click="toggleSidebar()" v-for="link in navLinks" :to="link.url" class="flex items-center gap-4">
                     <UIcon :name="link.icon!" :is="link.icon" class="h-8 w-8 text-white/50"></UIcon>
                     <span> {{ link.title }} </span>
                 </NuxtLink>
 
                 <!-- Authenticated -->
-                <div v-if="user">
+                <div v-if="user" @click="toggleSidebar()">
                     <NuxtLink to="/profile" class="flex items-center gap-4">
                         <UIcon name="i-heroicons-user" class="h-8 w-8 text-white/50"></UIcon>
                         <span> My Profile </span>
@@ -62,7 +62,7 @@
                 </div>
                 
                 <div v-if="user">
-                    <div @click="supabase.auth.signOut()" class="flex items-center gap-4">
+                    <div @click="supabase.auth.signOut(); toggleSidebar()" class="flex items-center gap-4">
                         <UIcon name="i-heroicons-arrow-top-right-on-square" class="h-8 w-8 text-white/50"></UIcon>
                         <span> Logout </span>
                     </div>
@@ -70,7 +70,7 @@
                     
 
                 <!-- Not Authenticated -->
-                <div v-if="!user" class="flex gap-4 items-center"> 
+                <div @click="toggleSidebar()" v-if="!user" class="flex gap-4 items-center"> 
                     <div> <NuxtLink to="/auth/login">Login</NuxtLink> </div>
                     <div>|</div>
                     <div> <NuxtLink to="/auth/login">Register</NuxtLink> </div>

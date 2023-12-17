@@ -1,10 +1,12 @@
 <template>
 
-    <home-hero></home-hero>
-    <home-features></home-features>
+    <div class="max-w-4xl mx-auto py-24">
+        <home-public-hero></home-public-hero>
+        <home-public-features></home-public-features>
+    </div>
 
-    <!-- <home-gallery></home-gallery> -->
-
-    <background-elements></background-elements>
-    
 </template>
+
+<script setup lang="ts">
+
+</script>

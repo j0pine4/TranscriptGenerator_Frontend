@@ -335,7 +335,7 @@
     }
 
     definePageMeta({
-        middleware: ["is-authenticated"]
+        middleware: ["auth"]
     })
 
     const { getTranscriptByID, saveDocument } = useCustomFetch();

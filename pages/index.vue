@@ -9,9 +9,4 @@
 
 const user = useSupabaseUser();
 
-// definePageMeta({
-//     middleware: ["is-authenticated"]
-// })
-
-
 </script>

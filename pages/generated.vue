@@ -84,6 +84,10 @@
     import { useMutation } from '@tanstack/vue-query';
     import { useGlobalState } from '~/stores/globalState';
 
+    definePageMeta({
+        middleware: ["auth"]
+    })
+
     const state = useGlobalState()
     const router = useRouter();
     const { saveDocument, generateNotes } = useCustomFetch();
