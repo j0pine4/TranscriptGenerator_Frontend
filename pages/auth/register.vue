@@ -8,7 +8,6 @@
             <img class="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 unselectable w-[1600px] h-[1600px]" src="~/assets/img/sphere.svg" alt="">
         </div>
 
-
         <div class="max-w-lg mx-auto px-4 sm:px-6 lg:px-8 my-20 lg:py-36 rounded">
 
             <h1 class="text-3xl sm:text-5xl lg:text-7xl lg:leading-tight font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary text-center mb-4"> Register </h1> 
@@ -26,6 +25,8 @@
                 <UInput :required="true" v-model="credentials.password2" type="password" class="w-full" placeholder="Re-enter Password"></UInput>
 
                 <p class="text-red-500"> {{ errorMSG }} </p>
+
+                <p class="mb-4"> You will recieve an email to verify your account after registration. </p>
 
                 <button type="submit" class="bg-primary p-3 rounded-md text-white w-full"> Register </button>
             </form>
@@ -77,7 +78,7 @@
             return;
         } 
         
-        router.push('/auth/login')
+        router.push('/auth/success')
     }
 </script>
 

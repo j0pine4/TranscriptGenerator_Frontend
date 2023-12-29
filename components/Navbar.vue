@@ -17,7 +17,7 @@
                     </NuxtLink>
                 </div>
                 
-                <div @click="supabase.auth.signOut()" class="flex flex-col items-center hover:text-primary cursor-pointer">
+                <div @click="logout()" class="flex flex-col items-center hover:text-primary cursor-pointer">
                     <UIcon name="i-heroicons-arrow-top-right-on-square" class="h-6 w-6"></UIcon>
                     <p> Logout </p>
                 </div>
@@ -62,7 +62,7 @@
                 </div>
                 
                 <div v-if="user">
-                    <div @click="supabase.auth.signOut(); toggleSidebar()" class="flex items-center gap-4">
+                    <div @click="logout(); toggleSidebar()" class="flex items-center gap-4">
                         <UIcon name="i-heroicons-arrow-top-right-on-square" class="h-8 w-8 text-white/50"></UIcon>
                         <span> Logout </span>
                     </div>
@@ -86,6 +86,7 @@
     import { Link } from '~/models/links'
     const user = useSupabaseUser()
     const supabase = useSupabaseClient()
+    const { logout } = useAuth();
 
     const sideBarOpen = ref(false)
     defineShortcuts({
