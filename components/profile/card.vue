@@ -8,7 +8,7 @@
                 <h1 class="text-3xl lg:leading-tight font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mb-2"> This document will be DELETED </h1>
                 <p class="text-white mb-6"> Are you sure you'd like to continue? </p>
 
-                <form @submit.prevent="confirmDelete()" class="flex gap-4 max-w-sm mx-auto">
+                <form @submit.prevent="confirmDelete.mutate()" class="flex gap-4 max-w-sm mx-auto">
                     <button type="submit" class="border border-primary p-3 rounded-md text-primary w-full"> Delete </button>
                     <button @click="deleteModal = false" type="button" class="bg-primary p-3 rounded-md text-white w-full"> Cancel </button>
                 </form>
@@ -27,7 +27,7 @@
                 <iframe class="w-full h-[200px] rounded-xl mb-1" :src="'https://www.youtube.com/embed/' + props.document?.videoID" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
 
-            <p class="font-light"> {{ parseDescription(props.document?.description!) }} </p>
+            <!-- <p class="font-light"> {{ parseDescription(props.document?.description!) }} </p> -->
 
             <template #footer>
                 <div class="flex justify-between w-full gap-2 h-full place-content-end">
@@ -42,8 +42,8 @@
 
 <script setup lang="ts">
 
-import { Document } from 'models/document';
-import { PropType } from 'nuxt/dist/app/compat/capi';
+import { useMutation } from '@tanstack/vue-query';
+import type { Document } from '~/models/document';
 
 const { parseDate, parseDescription } = useUtils();
 const { deleteDocument }  = useCustomFetch();
@@ -57,11 +57,15 @@ const documentID = ref(0)
 
 const emits = defineEmits(['delete-doc',])
 
-const confirmDelete = async () => {
-    await deleteDocument(props.document?.id!);
-    emits('delete-doc');
-    deleteModal.value = false;
-}
+const confirmDelete = useMutation({
+
+    mutationFn: () => deleteDocument(documentID.value),
+    onSuccess: (resp) => {
+        console.log(`Mutation Done`)
+        emits('delete-doc');
+        deleteModal.value = false;
+    }
+}) 
 
 const setDocument = (id: number) => {
     deleteModal.value = true;

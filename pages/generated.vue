@@ -11,7 +11,7 @@
 
                 <UInput v-model="notesSave.title" id="notes-title" type="text" required maxlength="255" :disabled="submitted" placeholder="Title"></UInput>
 
-                <UTextarea v-model="notesSave.description" id="notes-description" placeholder="Description" :disabled="submitted" maxlength="255" required></UTextarea>
+                <!-- <UTextarea v-model="notesSave.description" id="notes-description" placeholder="Description" :disabled="submitted" maxlength="255" required></UTextarea> -->
 
                 <button type="submit" class="bg-primary p-3 rounded-md text-white w-full" :disabled="submitted"> Save </button>
             
@@ -107,7 +107,7 @@
     }
 
     // Create Mutations
-    const generateMutation = generateNotes(state.prompt!, state.transcript);
+    const generateMutation = generateNotes(state.prompt!, state.transcript, state.transcript_token_amount);
     const saveDocMutation = useMutation({
         mutationFn: () => saveDocument(notesSave.value, 'GENERATED'),
         onSuccess: (resp) => {

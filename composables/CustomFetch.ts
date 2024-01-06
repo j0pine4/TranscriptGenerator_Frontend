@@ -1,9 +1,8 @@
-import { UseQueriesOptions, useMutation, useQuery, useQueryClient } from "@tanstack/vue-query"
+import { useMutation, useQuery } from "@tanstack/vue-query"
 import { useGlobalState } from "~/stores/globalState"
-import { useAuth } from "./useAuth"
-import { Transcript } from "models/transcript"
-import { Document } from "models/document"
-import { PROMPTS } from "models/prompts"
+import type { Transcript } from "../models/transcript"
+import type { Document } from "../models/document"
+import { PROMPTS } from "../models/prompts"
 
 export const useCustomFetch = () => {
     const state = useGlobalState()
@@ -22,11 +21,12 @@ export const useCustomFetch = () => {
         })
     }
 
-    const generateNotes = (prompt: PROMPTS | string, transcript: string | string[]) => {
+    const generateNotes = (prompt: PROMPTS | string, transcript: string | string[], transcript_token_amount: number) => {
         const url = `/api/transcripts/generate/`
 
         let body = {
-            'query' : prompt + transcript
+            'query' : prompt + transcript,
+            'transcript_token_amount': transcript_token_amount
         }
 
         return useMutation({
@@ -68,17 +68,41 @@ export const useCustomFetch = () => {
         return $axios.post<Document>(url, documentParams).then(resp => { return resp.data })
     }
 
+    const deleteDocument =  (id: number) => {
+        const url = `/api/transcripts/documents/${id}/`
+        return $axios.delete<Document>(url).then(resp => { return resp.data })
+    }
 
-    const deleteDocument = async (id: number) => {
-        const url = `${config.public.BASE_URL}/api/transcripts/documents/${id}/`
+    // const deleteDocument = (id: number) => {
+    //     const url = `/api/transcripts/documents/${id}/`
 
-        const { data, error } = await useFetch(url, {
-            method: "DELETE",
-            credentials: 'include'
+    //     return useMutation({
+    //         mutationFn: () => $axios.delete<string | string[]>(url).then(resp => { return resp.data })
+    //     })
+
+    // }
+
+    // const deleteDocument = async (id: number) => {
+    //     const url = `${config.public.BASE_URL}/api/transcripts/documents/${id}/`
+
+    //     const { data, error } = await useFetch(url, {
+    //         method: "DELETE",
+    //         headers: 
+    //     })
+
+    //     return { data, error }
+
+    // }
+
+    const tokenCounterTest = () => {
+        const url = `/api/transcripts/token-counter-test/`
+
+        return useQuery({
+            queryKey: ['token-test'],
+            queryFn: () => $axios.get(url).then(resp => { return resp.data }),
+            refetchOnWindowFocus: false,
+            retry: false
         })
-
-        return { data, error }
-
     }
 
     const getConversation = (id: number) => {
@@ -128,7 +152,8 @@ export const useCustomFetch = () => {
         getDocumentByID,
         getConversation,
         getMessagesForConversation,
-        sendNewMessage
+        sendNewMessage,
+        tokenCounterTest
     }
 
 }

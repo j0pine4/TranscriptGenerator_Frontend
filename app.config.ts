@@ -20,6 +20,9 @@ export default defineAppConfig({
           height: 'h-10'
         }
       },
+    },
+    notifications: {
+      position: 'right-0 top-0'
     }
   }
 })

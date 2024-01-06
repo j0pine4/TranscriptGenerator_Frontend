@@ -9,7 +9,7 @@
             </div>
 
             <!-- Authenticated -->
-            <div v-if="user" class="hidden md:flex gap-4 items-center"> 
+            <div v-if="user" class="hidden md:flex gap-4 items-center z-[100]"> 
                 <div>
                     <NuxtLink to="/profile" class="flex flex-col items-center hover:text-primary">
                         <UIcon name="i-heroicons-user" class="h-6 w-6"></UIcon>
@@ -83,7 +83,7 @@
 </template>
 
 <script setup lang="ts">
-    import { Link } from '~/models/links'
+    import type { Link } from '~/models/links';
     const user = useSupabaseUser()
     const supabase = useSupabaseClient()
     const { logout } = useAuth();

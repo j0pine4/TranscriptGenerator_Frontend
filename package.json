@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@heroicons/vue": "^2.0.18",
-    "@nuxt/ui": "^2.9.0",
+    "@nuxt/ui": "^2.11.1",
     "@pinia/nuxt": "^0.4.11",
     "@studio-freight/lenis": "^1.0.27",
     "@tanstack/vue-query": "^4.35.3",

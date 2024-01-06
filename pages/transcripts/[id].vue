@@ -192,7 +192,7 @@
 
                 <UInput v-model="transcriptSave.title" id="transcript-title" type="text" required maxlength="255" :disabled="submitted" placeholder="Title"></UInput>
         
-                <UTextarea v-model="transcriptSave.description" id="transcript-description" placeholder="Description" :disabled="submitted" maxlength="255" required></UTextarea>
+                <!-- <UTextarea v-model="transcriptSave.description" id="transcript-description" placeholder="Description" :disabled="submitted" maxlength="255" required></UTextarea> -->
 
                 <button type="submit" class="bg-primary p-3 rounded-md text-white w-full" :disabled="submitted"> Save </button>
             
@@ -288,8 +288,27 @@
                     </div>
 
                 </div>
-                
 
+                <div v-if="!error && !isLoading && transcript?.allowed" class="print:hidden mb-4">
+                    <UMeterGroup :min="0" :max="transcript?.token_limit" size="md" indicator icon="i-heroicons-minus">
+                        <UMeter :value="transcript?.tokensUsed" color="primary" label="Tokens Used" />
+                        <UMeter :value="transcript?.new_transcript_token_amount" color="gray" label="Tokens in this transcript" />
+                    </UMeterGroup>
+                </div>
+
+                <div v-if="transcript">
+                    <p v-if="!error && !isLoading && !transcript?.allowed && transcript?.new_transcript_token_amount > transcript?.tokensLeft && transcript?.new_transcript_token_amount < 16_000" class="text-red-400"> You have reached your token quota for the day </p>
+                    <p v-if="!error && !isLoading && !transcript?.allowed && (transcript?.new_transcript_token_amount > 16_000)" class="text-red-400"> This video is too long to process through AI </p>
+                </div>
+
+                <div v-if="!error && !isLoading && !transcript?.allowed" class="print:hidden mb-4">
+                    <UMeterGroup :min="0" :max="transcript?.token_limit" size="md" indicator icon="i-heroicons-minus">
+                        <UMeter :value="transcript?.tokensUsed" color="primary" label="Tokens Used" />
+                        <UMeter :value="transcript?.new_transcript_token_amount" color="red" label="Tokens in this transcript" />
+                    </UMeterGroup>
+                </div>
+                
+                
                 <!-- <h1 v-if="state.transcript"> Tokens: {{ tokenNumbers(state.transcript) }} </h1> -->
 
                 <h1 class="text-3xl lg:leading-tight font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mb-2">Original Video: </h1>
@@ -311,6 +330,8 @@
                 
 
             </div>
+
+            <UNotifications />
             
             <sidebar></sidebar>
             
@@ -343,7 +364,7 @@
     const route = useRoute();
     const submitted = ref(false)
     const video_id: string = route.params.id.toString();
-
+    const toast = useToast()
 
     const transcriptSave = ref({
         videoID: '',
@@ -362,9 +383,9 @@
     const handlePrompt = (prompt: PROMPTS | string) => {
         state.prompt = prompt;
         state.transcript = transcript.value!.transcript;
+        state.transcript_token_amount = transcript.value!.new_transcript_token_amount;
         state.currentVideoID = video_id;
 
-        console.log(`Sending transcript: ${state.transcript} to generate page with prompt of ${state.prompt}`)
         router.push('/generated');
     }
 
@@ -378,7 +399,11 @@
         transcriptSave.value.content = transcript.value?.transcript!;
 
         await saveDocument(transcriptSave.value, 'TRANSCRIPT')
-        router.push('/profile')
+
+        // Close modal and add toast notification
+        saveModal.value = false;
+        toast.add({ title: 'Transcript has been saved to your profile' })
+        // router.push('/profile')
     }
 
 
